@@ -1,20 +1,20 @@
 {
   "title": "星辰曦羽的站点",
-  "description": "阳光灿烂，记录我的技术与生活。",
+  "description": "月落星沉，心事如澜夜未央。",
   "author": {
     "name": "星辰曦羽",
-    "bio": "全栈开发者 / 摄影 / 旅行。分享前端、Node.js、效率与生活。",
-    "avatar": "https://unavatar.io/github/octocat",
-    "location": "Shanghai, China"
+    "bio": "阳光灼热,数不尽夏日繁华;蝉鸣幽幽,道不完苦辣酸甜。",
+    "avatar": "https://img.antares.xin/main/1.webp",
+    "location": "浙江, 中国"
   },
   "social": {
-    "github": "https://github.com/yourname",
-    "email": "mailto:your@email.com",
+    "github": "https://github.com/Aesculapius11",
+    "email": "mailto:admin@antares.xin",
     "weibo": "https://weibo.com/",
-    "bilibili": "https://space.bilibili.com/"
+    "bilibili": "https://space.bilibili.com/310810015"
   },
   "themeColor": "#FC766A",
-  "coverImage": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1920&auto=format&fit=crop"
+  "coverImage": "https://img.antares.xin/main/2.webp"
 }
 
 

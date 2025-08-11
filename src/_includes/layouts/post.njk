@@ -73,6 +73,119 @@ layout: layouts/base.njk
       </div>
     </div>
   </section>
+
+    <section class="mt-12 p-6 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03]" data-aos="fade-up" data-aos-delay="200">
+       <div id="giscus-container"></div>
+                        <script>
+          // 动态重新加载 Giscus 以切换主题
+          function reloadGiscusWithTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const theme = isDark ? 'dark' : 'light';
+            
+            // console.log('Reloading Giscus with theme:', theme);
+            
+            // 清空容器
+            const container = document.getElementById('giscus-container');
+            container.innerHTML = '';
+            
+            // 创建新的 script 标签
+            const script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.setAttribute('data-repo', 'shadowjade-studio/discussion');
+            script.setAttribute('data-repo-id', 'R_kgDOPX_60w');
+            script.setAttribute('data-category', 'Announcements');
+            script.setAttribute('data-category-id', 'DIC_kwDOPX_6084Ctwnj');
+            script.setAttribute('data-mapping', 'pathname');
+            script.setAttribute('data-strict', '0');
+            script.setAttribute('data-reactions-enabled', '1');
+            script.setAttribute('data-emit-metadata', '0');
+            script.setAttribute('data-input-position', 'top');
+            script.setAttribute('data-theme', theme);
+            script.setAttribute('data-lang', 'zh-CN');
+            script.setAttribute('data-loading', 'lazy');
+            script.setAttribute('crossorigin', 'anonymous');
+            script.async = true;
+            
+            container.appendChild(script);
+          }
+
+          // 监听主题变化
+          function setupThemeObserver() {
+            const observer = new MutationObserver((mutations) => {
+              mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                  // console.log('Theme change detected, reloading Giscus...');
+                  // 延迟执行，确保 DOM 更新完成
+                  setTimeout(reloadGiscusWithTheme, 300);
+                }
+              });
+            });
+
+            observer.observe(document.documentElement, {
+              attributes: true,
+              attributeFilter: ['class']
+            });
+            
+            // console.log('Theme observer setup complete');
+          }
+
+          // 初始化 Giscus
+          function loadGiscus() {
+            const script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.setAttribute('data-repo', 'shadowjade-studio/discussion');
+            script.setAttribute('data-repo-id', 'R_kgDOPX_60w');
+            script.setAttribute('data-category', 'Announcements');
+            script.setAttribute('data-category-id', 'DIC_kwDOPX_6084Ctwnj');
+            script.setAttribute('data-mapping', 'pathname');
+            script.setAttribute('data-strict', '0');
+            script.setAttribute('data-reactions-enabled', '1');
+            script.setAttribute('data-emit-metadata', '0');
+            script.setAttribute('data-input-position', 'top');
+            // 初始主题根据当前网站状态设置
+            script.setAttribute('data-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            script.setAttribute('data-lang', 'zh-CN');
+            script.setAttribute('data-loading', 'lazy');
+            script.setAttribute('crossorigin', 'anonymous');
+            script.async = true;
+            
+            // 当 Giscus 加载完成后，设置主题观察器
+            script.onload = () => {
+              // console.log('Giscus script loaded successfully');
+              // 设置主题观察器
+              setupThemeObserver();
+            };
+            
+            script.onerror = () => {
+              // console.error('Failed to load Giscus script');
+            };
+            
+            document.getElementById('giscus-container').appendChild(script);
+          }
+
+          // 页面加载完成后初始化 Giscus
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadGiscus);
+          } else {
+            loadGiscus();
+          }
+          
+          // 额外的主题切换监听器（备用方案）
+          document.addEventListener('DOMContentLoaded', () => {
+            // 监听主题切换按钮的点击事件
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+              themeToggle.addEventListener('click', () => {
+                // console.log('Theme toggle clicked, reloading Giscus...');
+                setTimeout(reloadGiscusWithTheme, 300);
+              });
+            }
+          });
+        </script>
+   </section>
+
+
 </article>
+
 
 

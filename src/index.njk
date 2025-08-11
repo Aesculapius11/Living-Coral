@@ -20,7 +20,7 @@ title: 首页
     <div class="mt-6 flex items-center justify-center gap-5 text-white/90">
       <a href="{{ site.social.github }}" class="hover:text-livingCoral">GitHub</a>
       <a href="{{ site.social.email }}" class="hover:text-livingCoral">邮箱</a>
-      <a href="{{ site.social.weibo }}" class="hover:text-livingCoral">微博</a>
+{#      <a href="{{ site.social.weibo }}" class="hover:text-livingCoral">微博</a>#}
       <a href="{{ site.social.bilibili }}" class="hover:text-livingCoral">B站</a>
     </div>
   </div>
@@ -40,6 +40,12 @@ title: 首页
       {% endif %}
       <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ post.date | readableDate }}</p>
       <p class="mt-1 font-semibold">{{ post.data.title }}</p>
+        {% if post.data.category %}
+        <span class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">{{ post.data.category }}</span>
+        {% endif %} 
+        {% for tag in post.data.tags %}
+        <span class="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">#{{ tag }}</span>
+        {% endfor %}
       <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ post.data.description }}</p>
     </a>
     {% endfor %}

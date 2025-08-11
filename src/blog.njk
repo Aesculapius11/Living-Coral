@@ -23,6 +23,7 @@ permalink: /blog/
         {% for tag in post.data.tags %}
         <span class="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">#{{ tag }}</span>
         {% endfor %}
+        <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ post.data.description }}</p>
       </div>
     </a>
     {% endfor %}

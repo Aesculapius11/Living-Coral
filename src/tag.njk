@@ -21,6 +21,12 @@ eleventyComputed:
       {% endif %}
       <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ post.date | readableDate }}</p>
       <p class="mt-1 font-semibold">{{ post.data.title }}</p>
+        {% if post.data.category %}
+        <span class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">{{ post.data.category }}</span>
+        {% endif %}
+        {% for tag in post.data.tags %}
+        <span class="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">#{{ tag }}</span>
+        {% endfor %}
       <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ post.data.description }}</p>
     </a>
     {% endfor %}
