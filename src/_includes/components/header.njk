@@ -5,9 +5,17 @@
         <span class="w-2.5 h-2.5 rounded-full" style="background-color: {{ site.themeColor }};"></span>
         {{ site.title }}
       </a>
-      <button id="mobileMenuBtn" class="md:hidden p-2 rounded hover:bg-black/5 dark:hover:bg-white/10" aria-label="menu">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
+      <div class="flex items-center gap-2">
+        <!-- 移动端黑暗模式切换按钮 -->
+        <button id="themeToggleMobile" class="md:hidden p-2 rounded hover:bg-black/5 dark:hover:bg-white/10" aria-label="toggle theme">
+          <svg id="icon-sun-mobile" class="w-5 h-5 hidden dark:inline" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364-1.414-1.414M7.05 7.05 5.636 5.636m12.728 0-1.414 1.414M7.05 16.95l-1.414 1.414M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/></svg>
+          <svg id="icon-moon-mobile" class="w-5 h-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <!-- 移动端菜单按钮 -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded hover:bg-black/5 dark:hover:bg-white/10" aria-label="menu">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
       <div id="navLinks" class="hidden md:flex items-center gap-6">
         <a href="/blog/" class="hover:text-livingCoral">博客</a>
         <a href="/tags/" class="hover:text-livingCoral">标签</a>

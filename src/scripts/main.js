@@ -22,8 +22,13 @@ function toggleTheme() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
 
+  // 桌面端黑暗模式切换按钮
   const btn = document.getElementById('themeToggle');
   if (btn) btn.addEventListener('click', toggleTheme);
+
+  // 移动端黑暗模式切换按钮
+  const mobileThemeBtn = document.getElementById('themeToggleMobile');
+  if (mobileThemeBtn) mobileThemeBtn.addEventListener('click', toggleTheme);
 
   const mobileBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
