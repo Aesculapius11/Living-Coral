@@ -10,6 +10,59 @@
   .card {
     @apply p-5 rounded-2xl border border-black\/5 dark:border-white\/10 shadow-sm;
   }
+
+  /* 自定义 Markdown 表格样式 */
+  .prose table {
+    @apply w-full text-sm border-separate border-spacing-0 rounded-xl overflow-hidden;
+  }
+  
+  .prose thead th {
+    @apply bg-livingCoral/10 font-semibold text-neutral-700 dark:text-neutral-200;
+  }
+  
+  .prose th,
+  .prose td {
+    @apply p-3 align-middle border-b border-black/5 dark:border-white/10 border-r border-black/5 dark:border-white/10;
+  }
+  
+  .prose th:last-child,
+  .prose td:last-child {
+    @apply border-r-0;
+  }
+  
+  .prose tbody tr:hover {
+    @apply bg-black/5 dark:bg-white/5;
+  }
+  
+  .prose tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  
+  .prose thead th:first-child {
+    @apply rounded-tl-xl;
+  }
+  
+  .prose thead th:last-child {
+    @apply rounded-tr-xl;
+  }
+  
+  .prose tfoot td:first-child {
+    @apply rounded-bl-xl;
+  }
+  
+  .prose tfoot td:last-child {
+    @apply rounded-br-xl;
+  }
+
+  /* 移动端横向滚动 */
+  @media (max-width: 768px) {
+    .prose table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+  }
 }
 
 
