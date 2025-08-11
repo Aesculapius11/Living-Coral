@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{{ description or site.description }}" />
+    <meta name="theme-color" content="{{ site.themeColor }}" />
+     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico" />
+     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico" />
+     <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <style>
+      :root { --brand: {{ site.themeColor }}; }
+      .brand { color: var(--brand); }
+      .btn-brand { background: var(--brand); color: white; }
+      .btn-brand:hover { filter: brightness(0.95); }
+    </style>
+    <script>
+      (function(){
+        try{
+          const t = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (t === 'dark' || (!t && prefersDark)) document.documentElement.classList.add('dark');
+        }catch(e){}
+      })();
+    </script>
+  </head>
+  <body class="font-sans bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
+    {% include "../components/header.njk" %}
+
+    <main class="pt-16">
+      {{ content | safe }}
+    </main>
+
+    {% include "../components/footer.njk" %}
+
+    <script src="/assets/main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic'});</script>
+  </body>
+</html>
+
+

@@ -1,0 +1,52 @@
+---
+layout: layouts/base.njk
+title: 首页
+---
+
+<section class="relative min-h-[80vh] flex items-center justify-center">
+  <div class="absolute inset-0 -z-10">
+    <img src="{{ site.coverImage }}" alt="cover" class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-white dark:to-neutral-950"></div>
+  </div>
+
+  <div class="text-center px-6" data-aos="zoom-in">
+    <img src="{{ site.author.avatar }}" alt="avatar" class="w-28 h-28 md:w-32 md:h-32 rounded-full mx-auto shadow-soft object-cover border-4 border-white/80 dark:border-neutral-900/80" />
+    <h1 class="mt-6 text-3xl md:text-4xl font-bold text-white drop-shadow">{{ site.author.name }}</h1>
+    <p class="mt-3 text-white/90 max-w-2xl mx-auto">{{ site.description }}</p>
+    <div class="mt-6 flex items-center justify-center gap-4">
+      <a href="/blog/" class="btn-brand px-5 py-2 rounded-full shadow-soft">进入博客</a>
+      <a href="/about/" class="px-5 py-2 rounded-full bg-white/90 text-neutral-900 hover:bg-white">关于我</a>
+    </div>
+    <div class="mt-6 flex items-center justify-center gap-5 text-white/90">
+      <a href="{{ site.social.github }}" class="hover:text-livingCoral">GitHub</a>
+      <a href="{{ site.social.email }}" class="hover:text-livingCoral">邮箱</a>
+      <a href="{{ site.social.weibo }}" class="hover:text-livingCoral">微博</a>
+      <a href="{{ site.social.bilibili }}" class="hover:text-livingCoral">B站</a>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-4 py-12">
+  <h2 class="text-xl font-semibold mb-6">最新文章 ({{ collections.posts.length }}篇)</h2>
+  {% set latest = collections.posts | limit(3) %}
+  {% if latest.length > 0 %}
+  <div class="grid gap-6 md:grid-cols-3">
+    {% for post in latest %}
+    <a href="{{ post.url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+      {% if post.data.cover %}
+      <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
+        <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" class="w-full h-full object-cover" loading="lazy" />
+      </div>
+      {% endif %}
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ post.date | readableDate }}</p>
+      <p class="mt-1 font-semibold">{{ post.data.title }}</p>
+      <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ post.data.description }}</p>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center text-neutral-500 dark:text-neutral-400">暂无文章</p>
+  {% endif %}
+</section>
+
+

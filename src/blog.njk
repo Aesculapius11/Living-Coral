@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+title: 博客
+permalink: /blog/
+---
+
+<section class="max-w-6xl mx-auto px-4 py-10">
+  <h1 class="text-2xl font-bold mb-6">全部文章</h1>
+  <div class="grid gap-6 md:grid-cols-3">
+    {% for post in collections.posts %}
+    <a href="{{ post.url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="{{ loop.index0 % 6 * 60 }}">
+      {% if post.data.cover %}
+      <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
+        <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" class="w-full h-full object-cover" loading="lazy" />
+      </div>
+      {% endif %}
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ post.date | readableDate }}</p>
+      <p class="mt-1 font-semibold">{{ post.data.title }}</p>
+      <div class="mt-2 flex flex-wrap gap-2 text-sm">
+        {% if post.data.category %}
+        <span class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">{{ post.data.category }}</span>
+        {% endif %}
+        {% for tag in post.data.tags %}
+        <span class="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">#{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+

@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag | url }}/
+eleventyComputed:
+  title: "{{ tag }}"
+---
+
+<section class="max-w-6xl mx-auto px-4 py-10">
+  <h1 class="text-2xl font-bold mb-6">#{{ tag }}</h1>
+  <div class="grid gap-6 md:grid-cols-3">
+    {% for post in collections[tag] %}
+    <a href="{{ post.url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition">
+      {% if post.data.cover %}
+      <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
+        <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" class="w-full h-full object-cover" loading="lazy" />
+      </div>
+      {% endif %}
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ post.date | readableDate }}</p>
+      <p class="mt-1 font-semibold">{{ post.data.title }}</p>
+      <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ post.data.description }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>

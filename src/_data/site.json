@@ -1,0 +1,20 @@
+{
+  "title": "星辰曦羽的站点",
+  "description": "阳光灿烂，记录我的技术与生活。",
+  "author": {
+    "name": "星辰曦羽",
+    "bio": "全栈开发者 / 摄影 / 旅行。分享前端、Node.js、效率与生活。",
+    "avatar": "https://unavatar.io/github/octocat",
+    "location": "Shanghai, China"
+  },
+  "social": {
+    "github": "https://github.com/yourname",
+    "email": "mailto:your@email.com",
+    "weibo": "https://weibo.com/",
+    "bilibili": "https://space.bilibili.com/"
+  },
+  "themeColor": "#FC766A",
+  "coverImage": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1920&auto=format&fit=crop"
+}
+
+

@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: 分类
+permalink: /categories/
+---
+
+<section class="max-w-6xl mx-auto px-4 py-10">
+  <h1 class="text-2xl font-bold mb-6">分类</h1>
+  <div class="flex flex-wrap gap-3">
+    {% for c in collections.categoryList %}
+      <a href="/categories/{{ c | url }}/" class="px-3 py-1 rounded-full bg-livingCoral/10 text-livingCoral hover:bg-livingCoral/20 transition">{{ c }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+

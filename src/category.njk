@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.categoryList
+  size: 1
+  alias: cat
+permalink: /categories/{{ cat }}/
+eleventyComputed:
+  title: "{{ cat }}"
+---
+
+<section class="max-w-6xl mx-auto px-4 py-10">
+  <h1 class="text-2xl font-bold mb-6">{{ cat }}</h1>
+  <div class="grid gap-6 md:grid-cols-3">
+    {% for p in collections.posts %}
+      {% if p.data.category == cat %}
+      <a href="{{ p.url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition">
+        {% if p.data.cover %}
+        <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
+          <img src="{{ p.data.cover }}" alt="{{ p.data.title }}" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        {% endif %}
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ p.date | readableDate }}</p>
+        <p class="mt-1 font-semibold">{{ p.data.title }}</p>
+        <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ p.data.description }}</p>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+

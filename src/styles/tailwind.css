@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body { height: 100%; }
+}
+
+@layer components {
+  .card {
+    @apply p-5 rounded-2xl border border-black\/5 dark:border-white\/10 shadow-sm;
+  }
+}
+
+
