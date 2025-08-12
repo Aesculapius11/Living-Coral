@@ -63,6 +63,125 @@
       white-space: nowrap;
     }
   }
+  /* APlayer 主题适配 */
+/* APlayer 日间模式调整 */
+/* 背景色 */
+.aplayer {
+  background: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.aplayer.aplayer-fixed .aplayer-lrc:after,
+.aplayer.aplayer-fixed .aplayer-lrc:before {
+  display: none;
+}
+
+.aplayer.aplayer.aplayer-fixed .aplayer-body {
+  background: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+  position: fixed;
+}
+
+/* 滚动条 */
+.aplayer .aplayer-list ol::-webkit-scrollbar {
+  width: 5px;
+}
+
+.aplayer .aplayer-list ol::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #fac2bd !important;
+}
+
+.aplayer .aplayer-list ol::-webkit-scrollbar-thumb:hover {
+  background-color: #fac2bd !important;
+}
+
+
+
+/* 选中与播放中歌曲激活颜色 */
+.aplayer .aplayer-list ol li:hover {
+  background: #fac2bd !important;
+}
+
+.aplayer .aplayer-list ol li.aplayer-list-light {
+  background: #fac2bd !important;
+}
+
+
+
+/* APlayer 黑暗模式 */
+.dark .aplayer {
+  background: rgba(22, 22, 22, 0.6) !important;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+  
+}
+
+.dark .aplayer.aplayer-fixed .aplayer-body {
+  background: rgba(22, 22, 22, 0.6) !important;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dark
+  .aplayer
+  .aplayer-info
+  .aplayer-controller
+  .aplayer-time
+  .aplayer-icon
+  path {
+  fill: #d4d4d4;
+}
+
+.dark .aplayer .aplayer-list ol li:hover {
+  background: #FC766A !important;
+
+}
+
+.dark .aplayer .aplayer-list ol li.aplayer-list-light {
+  background: #FC766A !important;
+}
+
+.dark .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+  color: #f1f1f1;
+
+}
+
+.dark .aplayer .aplayer-list ol li .aplayer-list-index {
+  color: #f1f1f1;
+}
+
+.dark .aplayer .aplayer-list ol li .aplayer-list-author {
+  color: #f1f1f1;
+}
+.dark .aplayer .aplayer-info .aplayer-music .aplayer-title {
+  color: #f1f1f1;
+}
+.dark .aplayer .aplayer-info .aplayer-music .aplayer-author
+ {
+    color: #f1f1f1;
+}
+.dark .aplayer .aplayer-list ol li .aplayer-list-title 
+ {
+    color: #f1f1f1;
+}
+
+.dark .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon:hover path{
+  fill:#FC766A;
+}
+
+.dark .aplayer .aplayer-list ol::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #FC766A !important;
+}
+
+.dark.aplayer .aplayer-list ol::-webkit-scrollbar-thumb:hover {
+  background-color: #FC766A !important;
+}
+
+  .dark .aplayer .aplayer-lrc p { color: #9ca3af; }
+  .dark .aplayer .aplayer-lrc p.aplayer-lrc-current { color: #FC766A; }
 }
 
 
