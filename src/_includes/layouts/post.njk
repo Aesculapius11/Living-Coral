@@ -2,77 +2,116 @@
 layout: layouts/base.njk
 ---
 
-<article class="max-w-3xl mx-auto px-4">
-  <header class="mb-8">
-    {% if cover %}
-    <div class="h-56 md:h-72 w-full rounded-2xl overflow-hidden shadow-soft mb-6">
-      <img src="{{ cover }}" alt="{{ title }}" class="w-full h-full object-cover"/>
+<div class="max-w-7xl mx-auto px-4 flex gap-8">
+  <!-- 侧边大纲栏 -->
+  <aside class="hidden lg:block w-64 flex-shrink-0 sticky top-20 h-fit">
+    <div class="bg-white dark:bg-neutral-900 rounded-xl border border-black/5 dark:border-white/10 p-4 shadow-soft">
+      <h3 class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">目录</h3>
+      <nav id="tableOfContents" class="space-y-1 table-of-contents">
+        <!-- 大纲内容将通过JavaScript动态生成 -->
+      </nav>
     </div>
-    {% endif %}
-    <h1 class="text-3xl md:text-4xl font-bold mb-3" data-aos="fade-up">{{ title }}</h1>
-    <div class="flex flex-wrap items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400" data-aos="fade-up" data-aos-delay="50">
-      <span>{{ date | readableDate }}</span>
-      {% if category %}<a href="/categories/{{ category | url }}/" class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">{{ category }}</a>{% endif %}
-      {% if tags %}
-        <div class="flex items-center gap-2">
-          {% for tag in tags %}
-            <a href="/tags/{{ tag | url }}/" class="hover:text-livingCoral">#{{ tag }}</a>
-          {% endfor %}
+  </aside>
+
+  <!-- 主要内容区域 -->
+  <article class="flex-1 max-w-3xl">
+    <!-- 移动端大纲按钮 -->
+    <button id="mobileTocBtn" class="lg:hidden fixed bottom-6 right-6 z-50 w-12 h-12 bg-livingCoral text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- 移动端大纲弹窗 -->
+    <div id="mobileTocModal" class="lg:hidden fixed inset-0 z-50 bg-black/50 hidden">
+      <div class="absolute inset-0 flex items-end justify-center p-4">
+        <div class="bg-white dark:bg-neutral-900 rounded-t-2xl w-full max-w-md max-h-[70vh] overflow-hidden">
+          <div class="flex items-center justify-between p-4 border-b border-black/5 dark:border-white/10">
+            <h3 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300">目录</h3>
+            <button id="mobileTocClose" class="text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="p-4 overflow-y-auto max-h-[calc(70vh-80px)]">
+            <nav id="mobileTableOfContents" class="space-y-1 table-of-contents">
+              <!-- 移动端大纲内容将通过JavaScript动态生成 -->
+            </nav>
+          </div>
         </div>
-      {% endif %}
-    </div>
-  </header>
-
-  <div class="prose prose-neutral dark:prose-invert max-w-none" data-aos="fade-up" data-aos-delay="100">
-    {{ content | safe }}
-  </div>
-
-  <section class="mt-12" data-aos="fade-up" data-aos-delay="150">
-    <h2 class="text-xl font-semibold mb-4">相关文章</h2>
-    <div class="grid gap-4 md:grid-cols-3">
-      {# Nunjucks 无 selectattr/rejectattr，这里手动筛选 #}
-      {% set count = 0 %}
-      {% for p in collections.posts %}
-        {% if p.url != page.url and count < 3 %}
-          {% set show = false %}
-          {% if tags and p.data.tags %}
-            {% for t in tags %}
-              {% if p.data.tags.indexOf(t) > -1 %}{% set show = true %}{% endif %}
-            {% endfor %}
-          {% endif %}
-          {% if show %}
-            <a href="{{ p.url }}" class="block p-4 rounded-xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" title="{{ p.data.title }}">
-              <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ p.date | readableDate }}</p>
-              <p class="mt-1 font-medium">{{ p.data.title }}</p>
-            </a>
-            {% set count = count + 1 %}
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-      {% if count == 0 %}
-        {% set fallback = 0 %}
-        {% for p in collections.posts %}
-          {% if p.url != page.url and fallback < 3 %}
-            <a href="{{ p.url }}" class="block p-4 rounded-xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" title="{{ p.data.title }}">
-              <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ p.date | readableDate }}</p>
-              <p class="mt-1 font-medium">{{ p.data.title }}</p>
-            </a>
-            {% set fallback = fallback + 1 %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    </div>
-  </section>
-
-  <section class="mt-12 p-6 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03]" data-aos="fade-up" data-aos-delay="200">
-    <div class="flex items-center gap-4">
-      <img src="{{ site.author.avatar }}" alt="avatar" class="w-14 h-14 rounded-full object-cover" />
-      <div>
-        <p class="font-semibold">{{ site.author.name }}</p>
-        <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ site.author.bio }}</p>
       </div>
     </div>
-  </section>
+    <header class="mb-8">
+      {% if cover %}
+      <div class="h-56 md:h-72 w-full rounded-2xl overflow-hidden shadow-soft mb-6">
+        <img src="{{ cover }}" alt="{{ title }}" class="w-full h-full object-cover"/>
+      </div>
+      {% endif %}
+      <h1 class="text-3xl md:text-4xl font-bold mb-3" data-aos="fade-up">{{ title }}</h1>
+      <div class="flex flex-wrap items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400" data-aos="fade-up" data-aos-delay="50">
+        <span>{{ date | readableDate }}</span>
+        {% if category %}<a href="/categories/{{ category | url }}/" class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">{{ category }}</a>{% endif %}
+        {% if tags %}
+          <div class="flex items-center gap-2">
+            {% for tag in tags %}
+              <a href="/tags/{{ tag | url }}/" class="hover:text-livingCoral">#{{ tag }}</a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none" data-aos="fade-up" data-aos-delay="100">
+      {{ content | safe }}
+    </div>
+
+    <section class="mt-12" data-aos="fade-up" data-aos-delay="150">
+      <h2 class="text-xl font-semibold mb-4">相关文章</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        {# Nunjucks 无 selectattr/rejectattr，这里手动筛选 #}
+        {% set count = 0 %}
+        {% for p in collections.posts %}
+          {% if p.url != page.url and count < 3 %}
+            {% set show = false %}
+            {% if tags and p.data.tags %}
+              {% for t in tags %}
+                {% if p.data.tags.indexOf(t) > -1 %}{% set show = true %}{% endif %}
+              {% endfor %}
+            {% endif %}
+            {% if show %}
+              <a href="{{ p.url }}" class="block p-4 rounded-xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" title="{{ p.data.title }}">
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ p.date | readableDate }}</p>
+                <p class="mt-1 font-medium">{{ p.data.title }}</p>
+              </a>
+              {% set count = count + 1 %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% if count == 0 %}
+          {% set fallback = 0 %}
+          {% for p in collections.posts %}
+            {% if p.url != page.url and fallback < 3 %}
+              <a href="{{ p.url }}" class="block p-4 rounded-xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" title="{{ p.data.title }}">
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ p.date | readableDate }}</p>
+                <p class="mt-1 font-medium">{{ p.data.title }}</p>
+              </a>
+              {% set fallback = fallback + 1 %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="mt-12 p-6 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03]" data-aos="fade-up" data-aos-delay="200">
+      <div class="flex items-center gap-4">
+        <img src="{{ site.author.avatar }}" alt="avatar" class="w-14 h-14 rounded-full object-cover" />
+        <div>
+          <p class="font-semibold">{{ site.author.name }}</p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ site.author.bio }}</p>
+        </div>
+      </div>
+    </section>
 
     <section class="mt-12 p-6 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03]" data-aos="fade-up" data-aos-delay="200">
        <div id="giscus-container"></div>
@@ -183,9 +222,244 @@ layout: layouts/base.njk
           });
         </script>
    </section>
+  </article>
+</div>
 
+<!-- 大纲栏JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 生成大纲
+  function generateTableOfContents() {
+    const tocContainer = document.getElementById('tableOfContents');
+    const mobileTocContainer = document.getElementById('mobileTableOfContents');
+    
+    if (!tocContainer && !mobileTocContainer) return;
 
-</article>
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const tocItems = [];
+
+    headings.forEach((heading, index) => {
+      // 跳过大纲栏中的标题
+      const isInToc = heading.closest('#tableOfContents, #mobileTableOfContents, aside');
+      if (isInToc) return;
+      
+      // 跳过文本内容为"目录"的标题
+      const text = heading.textContent.trim();
+      if (text === '目录') return;
+      
+      // 跳过文章主标题（在header标签内的H1）
+      const isInHeader = heading.closest('header');
+      if (isInHeader && heading.tagName === 'H1') return;
+      
+      // 跳过所有H1标题（通常文章主标题都是H1）
+      if (heading.tagName === 'H1') return;
+
+      const id = heading.id || `heading-${index}`;
+      heading.id = id;
+
+      const level = parseInt(heading.tagName.charAt(1));
+      
+      tocItems.push({
+        id: id,
+        text: text,
+        level: level
+      });
+    });
+
+    // 生成大纲HTML
+    if (tocItems.length > 0) {
+      const tocHTML = tocItems.map(item => {
+        const indent = (item.level - 2) * 12; // h2为基准，每级缩进12px
+        const style = `padding-left: ${indent}px`;
+        
+        return `
+          <a href="#${item.id}" 
+             class="block text-sm text-neutral-600 dark:text-neutral-400 hover:text-livingCoral dark:hover:text-livingCoral transition-colors duration-200 py-1 rounded"
+             style="${style}"
+             data-heading-id="${item.id}">
+            ${item.text}
+          </a>
+        `;
+      }).join('');
+
+      // 更新桌面端大纲
+      if (tocContainer) {
+        tocContainer.innerHTML = tocHTML;
+      }
+
+      // 更新移动端大纲
+      if (mobileTocContainer) {
+        mobileTocContainer.innerHTML = tocHTML;
+      }
+
+      // 添加点击事件处理函数
+      function handleTocClick(e) {
+        if (e.target.tagName === 'A') {
+          e.preventDefault();
+          const targetId = e.target.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+             // 平滑滚动到目标位置，考虑顶部导航栏的高度
+             const headerHeight = 80; // 导航栏高度 + 一些额外空间
+             const rect = targetElement.getBoundingClientRect();
+             const scrollTop = window.pageYOffset + rect.top - headerHeight;
+             
+             window.scrollTo({
+               top: scrollTop,
+               behavior: 'smooth'
+             });
+
+            // 更新URL（不刷新页面）
+            history.pushState(null, null, `#${targetId}`);
+
+            // 如果是移动端，点击后关闭弹窗
+            const mobileModal = document.getElementById('mobileTocModal');
+            if (mobileModal && !mobileModal.classList.contains('hidden')) {
+              mobileModal.classList.add('hidden');
+            }
+          }
+        }
+      }
+
+      // 为桌面端大纲添加点击事件
+      if (tocContainer) {
+        tocContainer.addEventListener('click', handleTocClick);
+      }
+
+      // 为移动端大纲添加点击事件
+      if (mobileTocContainer) {
+        mobileTocContainer.addEventListener('click', handleTocClick);
+      }
+
+      // 监听滚动，高亮当前章节
+      let currentActiveId = null;
+      
+      function updateActiveHeading() {
+        const headings = tocItems.map(item => document.getElementById(item.id)).filter(Boolean);
+        
+        if (headings.length === 0) return;
+
+        let activeId = null;
+        
+        headings.forEach((heading, index) => {
+          const rect = heading.getBoundingClientRect();
+          
+          // 如果标题在视窗顶部附近，则认为是当前活跃的
+          if (rect.top <= 100) {
+            activeId = heading.id;
+          }
+        });
+
+        // 如果没有找到活跃的标题，选择最后一个
+        if (!activeId && headings.length > 0) {
+          const lastHeading = headings[headings.length - 1];
+          const lastRect = lastHeading.getBoundingClientRect();
+          if (lastRect.top < window.innerHeight) {
+            activeId = lastHeading.id;
+          }
+        }
+
+        // 更新活跃状态
+        if (activeId !== currentActiveId) {
+          // 移除之前的活跃状态
+          if (currentActiveId) {
+            const prevActiveDesktop = tocContainer?.querySelector(`[data-heading-id="${currentActiveId}"]`);
+            const prevActiveMobile = mobileTocContainer?.querySelector(`[data-heading-id="${currentActiveId}"]`);
+            
+            if (prevActiveDesktop) {
+              prevActiveDesktop.classList.remove('text-livingCoral', 'font-medium');
+              prevActiveDesktop.classList.add('text-neutral-600', 'dark:text-neutral-400');
+            }
+            if (prevActiveMobile) {
+              prevActiveMobile.classList.remove('text-livingCoral', 'font-medium');
+              prevActiveMobile.classList.add('text-neutral-600', 'dark:text-neutral-400');
+            }
+          }
+
+          // 添加新的活跃状态
+          if (activeId) {
+            const newActiveDesktop = tocContainer?.querySelector(`[data-heading-id="${activeId}"]`);
+            const newActiveMobile = mobileTocContainer?.querySelector(`[data-heading-id="${activeId}"]`);
+            
+            if (newActiveDesktop) {
+              newActiveDesktop.classList.remove('text-neutral-600', 'dark:text-neutral-400');
+              newActiveDesktop.classList.add('text-livingCoral', 'font-medium');
+            }
+            if (newActiveMobile) {
+              newActiveMobile.classList.remove('text-neutral-600', 'dark:text-neutral-400');
+              newActiveMobile.classList.add('text-livingCoral', 'font-medium');
+            }
+          }
+
+          currentActiveId = activeId;
+        }
+      }
+
+      // 监听滚动事件
+      window.addEventListener('scroll', updateActiveHeading);
+      
+      // 初始化活跃状态
+      updateActiveHeading();
+    } else {
+      const noContentMsg = '<p class="text-sm text-neutral-500 dark:text-neutral-400">暂无目录</p>';
+      if (tocContainer) tocContainer.innerHTML = noContentMsg;
+      if (mobileTocContainer) mobileTocContainer.innerHTML = noContentMsg;
+    }
+  }
+
+      // 移动端大纲弹窗控制
+    function setupMobileToc() {
+      const mobileTocBtn = document.getElementById('mobileTocBtn');
+      const mobileTocModal = document.getElementById('mobileTocModal');
+      const mobileTocClose = document.getElementById('mobileTocClose');
+
+      if (mobileTocBtn && mobileTocModal) {
+        mobileTocBtn.addEventListener('click', () => {
+          mobileTocModal.classList.remove('hidden');
+          // 添加动画类
+          setTimeout(() => {
+            const modalContent = mobileTocModal.querySelector('.bg-white, .dark\\:bg-neutral-900');
+            if (modalContent) {
+              modalContent.classList.add('mobile-toc-enter');
+            }
+          }, 10);
+        });
+      }
+
+      if (mobileTocClose && mobileTocModal) {
+        mobileTocClose.addEventListener('click', () => {
+          const modalContent = mobileTocModal.querySelector('.bg-white, .dark\\:bg-neutral-900');
+          if (modalContent) {
+            modalContent.classList.remove('mobile-toc-enter');
+          }
+          setTimeout(() => {
+            mobileTocModal.classList.add('hidden');
+          }, 300);
+        });
+      }
+
+      // 点击背景关闭弹窗
+      if (mobileTocModal) {
+        mobileTocModal.addEventListener('click', (e) => {
+          if (e.target === mobileTocModal) {
+            const modalContent = mobileTocModal.querySelector('.bg-white, .dark\\:bg-neutral-900');
+            if (modalContent) {
+              modalContent.classList.remove('mobile-toc-enter');
+            }
+            setTimeout(() => {
+              mobileTocModal.classList.add('hidden');
+            }, 300);
+          }
+        });
+      }
+    }
+
+  // 执行大纲生成和移动端设置
+  generateTableOfContents();
+  setupMobileToc();
+});
+</script>
 
 
 

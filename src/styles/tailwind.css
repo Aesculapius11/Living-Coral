@@ -184,4 +184,61 @@
   .dark .aplayer .aplayer-lrc p.aplayer-lrc-current { color: #FC766A; }
 }
 
+/* 大纲栏样式 */
+.table-of-contents {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+}
+
+.table-of-contents::-webkit-scrollbar {
+  width: 4px;
+}
+
+.table-of-contents::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-of-contents::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.3);
+  border-radius: 2px;
+}
+
+.table-of-contents::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.5);
+}
+
+.dark .table-of-contents::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.3);
+}
+
+.dark .table-of-contents::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.5);
+}
+
+/* 大纲链接悬停效果 */
+.table-of-contents a {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.table-of-contents a:hover {
+  transform: translateX(2px);
+}
+
+/* 移动端大纲弹窗动画 */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.mobile-toc-enter {
+  animation: slideUp 0.3s ease-out;
+}
+
 

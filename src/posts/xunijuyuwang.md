@@ -9,7 +9,7 @@ cover: https://img.antares.xin/xunijuyuwang/20.webp
 layout: layouts/post.njk
 ---
 
-## 夏日MC免费联机指南： 没有公网IP？用这些免费工具和朋友一起玩！
+## 引言
 
 暑期是与朋友联机畅玩MC的绝佳时机。不过，许多玩家在搭建MC服务器时，可能面临一个普遍的挑战：**缺乏公网IP地址**。
 
