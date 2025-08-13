@@ -23,7 +23,7 @@ module.exports = function (eleventyConfig) {
   // 文章集合
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi
-      .getFilteredByGlob("src/posts/*.md")
+      .getFilteredByGlob("src/blog/*.md")
       .sort((a, b) => {
         const dateA = new Date(a.date);
         const dateB = new Date(b.date);
@@ -45,7 +45,7 @@ module.exports = function (eleventyConfig) {
   // 分类集合
   eleventyConfig.addCollection("categoryList", (collectionApi) => {
     const catSet = new Set();
-    collectionApi.getFilteredByGlob("src/posts/*.md").forEach((item) => {
+    collectionApi.getFilteredByGlob("src/blog/*.md").forEach((item) => {
       if (item.data.category) catSet.add(item.data.category);
     });
     return [...catSet].sort();
