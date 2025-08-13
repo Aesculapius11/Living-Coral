@@ -1,0 +1,84 @@
+---
+layout: layouts/base.njk
+title: 页面未找到
+---
+
+<div class="min-h-[80vh] flex items-center justify-center px-4">
+  <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+    <!-- 404 数字 -->
+    <div class="mb-8">
+      <h1 class="text-8xl md:text-9xl font-bold text-livingCoral/20 dark:text-livingCoral/40">404</h1>
+    </div>
+    
+    <!-- 错误信息 -->
+    <div class="mb-8">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">页面未找到</h2>
+      <p class="text-neutral-600 dark:text-neutral-400 text-lg">
+        抱歉，您访问的页面不存在或已被移动。
+      </p>
+    </div>
+    
+    <!-- 装饰性图标
+    <div class="mb-8">
+      <div class="w-24 h-24 mx-auto bg-gradient-to-br from-livingCoral/10 to-livingCoral/5 rounded-full flex items-center justify-center">
+        <svg class="w-12 h-12 text-livingCoral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33"></path>
+        </svg>
+      </div>
+    </div> -->
+    
+    <!-- 操作按钮 -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="/" class="btn-brand px-6 py-3 rounded-full shadow-soft hover:shadow-lg transition-all duration-200">
+        返回首页
+      </a>
+      <a href="/blog/" class="px-6 py-3 rounded-full border border-livingCoral/20 text-livingCoral hover:bg-livingCoral/5 transition-all duration-200">
+        浏览文章
+      </a>
+    </div>
+    
+    <!-- 搜索建议 -->
+    <div class="mt-12 p-6 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03]">
+      <h3 class="text-lg font-semibold mb-3">找不到想要的？</h3>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+        您可以尝试以下操作：
+      </p>
+      <ul class="text-left space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+        <li class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-livingCoral rounded-full"></span>
+          检查网址是否正确
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-livingCoral rounded-full"></span>
+          返回上一页重新操作
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-livingCoral rounded-full"></span>
+          访问博客页面浏览文章
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-livingCoral rounded-full"></span>
+          联系我获取帮助
+        </li>
+      </ul>
+    </div>
+    
+    <!-- 联系信息 -->
+    <div class="mt-8">
+      <p class="text-neutral-500 dark:text-neutral-400 mb-2">需要帮助？</p>
+      <div class="flex items-center justify-center gap-4 text-sm">
+        <a href="mailto:{{ site.social.email }}" class="text-livingCoral hover:underline">邮箱</a>
+        <span class="text-neutral-300 dark:text-neutral-600">|</span>
+        <a href="{{ site.social.github }}" class="text-livingCoral hover:underline">GitHub</a>
+        <span class="text-neutral-300 dark:text-neutral-600">|</span>
+        <a href="{{ site.social.bilibili }}" class="text-livingCoral hover:underline">B站</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 装饰性背景元素 -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+  <div class="absolute -top-40 -right-40 w-80 h-80 bg-livingCoral/5 rounded-full blur-3xl"></div>
+  <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-livingCoral/5 rounded-full blur-3xl"></div>
+</div>
