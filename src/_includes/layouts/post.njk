@@ -53,7 +53,7 @@ layout: layouts/base.njk
         <span>{{ date | readableDate }}</span>
         {% if category %}<a href="/categories/{{ category | url }}/" class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">{{ category }}</a>{% endif %}
         {% if tags %}
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 flex-wrap">
             {% for tag in tags %}
               <a href="/tags/{{ tag | url }}/" class="hover:text-livingCoral">#{{ tag }}</a>
             {% endfor %}
