@@ -3,7 +3,7 @@ title: 白嫖Vercel和Upstash的免费服务搭建个跨平台的影视聚合播
 description: 昨天刷B站的时候突然看到了一个蛮有意思的东西——Moon TV，简单看了下发现这玩意儿可以无服务器部署，而且部署方式蛮简单的，加上这个项目的界面还挺好看的，今天就顺手搭建一个来玩玩。
 date: 2025-08-13
 tags: [MoonTV, Vercel]
-category: 好玩的项目
+category: 白嫖怪出发
 author: 星辰曦羽
 cover: https://img.antares.xin/moontv/2.webp
 layout: layouts/post.njk
