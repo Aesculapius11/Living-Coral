@@ -10,12 +10,14 @@ layout: layouts/post.njk
 ---
 ## 前言
 昨天刷B站的时候突然看到了一个蛮有意思的东西——Moon TV，简单看了下发现这玩意儿可以无服务器部署，而且部署方式蛮简单的，加上这个项目的界面还挺好看的，今天就顺手搭建一个来玩玩。
+(8月17日更新 Moon TV 改名为Luna TV)
 ![MoonTV](https://img.antares.xin/moontv/1.webp)
 ![MoonTV](https://img.antares.xin/moontv/2.webp)
 ## 部署
 ### Fork MoonTV 仓库到你的 GitHub
 ![Fork 仓库](https://img.antares.xin/moontv/15.webp)
 按理来说这一步应该是点个按钮就能完成的事情，但是有个问题就是我找不到他的原仓库，原仓库进去是404的，因此我只能退而求其次，在github上搜索了下MoonTV被Fork次数最多的仓库，然后去Fork了那个仓库……
+(8月17日更新 这是Luna TV的仓库：[Github仓库](https://github.com/MoonTechLab/LunaTV))
 ![404](https://img.antares.xin/moontv/404.webp)
 ### 部署项目至Vercel
 打开你Fork后的仓库往下拉至部署说明，这里的部署步骤非常详细，对着做就可以完成部署。
