@@ -241,4 +241,97 @@
   animation: slideUp 0.3s ease-out;
 }
 
+/* 按钮上升 */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 
+/* Apply the floating animation */
+#scrollToTopBtn.float img {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Falling Animation */
+@keyframes fall {
+  from {
+    transform: translateY(-100%); /* 初始位置在上方 */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); /* 结束位置，按钮的原始位置 */
+    opacity: 1;
+  }
+}
+
+/* 上升动画 */
+@keyframes rise {
+  from {
+    transform: translateY(0); /* 初始位置，按钮的原始位置 */
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%); /* 结束位置，在上方隐藏 */
+    opacity: 0;
+  }
+}
+
+/* 应用下落动画*/
+#scrollToTopBtn.fall-down img {
+  animation: fall 0.5s ease-out forwards;
+}
+
+/* 应用上升动画 */
+#scrollToTopBtn.rise-up img {
+  animation: rise 0.5s ease-out forwards;
+}
+
+#scrollToTopBtn {
+  width: 70px;
+  height: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: -50px; /* 初始位置，紧贴顶部 */
+  right: 8px;
+  z-index: 50;
+  box-shadow: none;
+  transition: opacity 0.3s ease-in-out, top 0.5s ease-out; /* 平滑过渡 opacity 和 top */
+  opacity: 0; /* 初始状态完全透明 */
+}
+
+#scrollToTopBtn img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#scrollToTopBtn:focus {
+  outline: none;
+}
+
+#scrollToTopBtn.visible {
+  opacity: 1; /* 可见状态,显示，动画完成后设置为可见 */
+  top: -70px;/*下落动画完成后，距离顶部-70*/
+}
+
+#scrollToTopBtn.hidden {
+  visibility: hidden;
+}
+
+/* 在移动设备上隐藏按钮 */
+@media (max-width: 1024px) {
+  #scrollToTopBtn {
+    display: none; /* 彻底隐藏元素 */
+  }
+}
