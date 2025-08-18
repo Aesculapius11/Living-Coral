@@ -4,32 +4,108 @@ title: 关于
 permalink: /about/
 ---
 
-<section class="max-w-3xl mx-auto px-4 py-10">
-  <div class="flex items-start gap-6" data-aos="fade-up">
-    <img src="{{ site.author.avatar }}" alt="avatar" class="w-24 h-24 rounded-full object-cover" />
-    <div>
-      <h1 class="text-2xl font-bold">{{ site.author.name }}</h1>
-      <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ site.author.bio }}</p>
-      <p class="mt-2 text-neutral-600 dark:text-neutral-400">坐标：{{ site.author.location }}</p>
-      <div class="mt-4 flex items-center gap-4">
-        <a href="{{ site.social.github }}" class="hover:text-livingCoral">GitHub</a>
-        <a href="{{ site.social.email }}" class="hover:text-livingCoral">邮箱</a>
-{#        <a href="{{ site.social.weibo }}" class="hover:text-livingCoral">微博</a>#}
-        <a href="{{ site.social.bilibili }}" class="hover:text-livingCoral">B站</a>
-      </div>
-    </div>
-  </div>
+<!-- 主要内容区域：使用flexbox布局 -->
+<div class="max-w-7xl mx-auto px-4 py-10">
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- 左侧主要内容 -->
+    <div class="flex-1">
+      <section class="mb-10" data-aos="fade-up">
+        <div class="flex items-start gap-6">
+          <img src="{{ site.author.avatar }}" alt="avatar" class="w-24 h-24 rounded-full object-cover" />
+          <div>
+            <h1 class="text-2xl font-bold">{{ site.author.name }}</h1>
+            <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ site.author.bio }}</p>
+            <p class="mt-2 text-neutral-600 dark:text-neutral-400">坐标：{{ site.author.location }}</p>
+            <div class="mt-4 flex items-center gap-4">
+              <a href="{{ site.social.github }}" class="hover:text-livingCoral">GitHub</a>
+              <a href="{{ site.social.email }}" class="hover:text-livingCoral">邮箱</a>
+{#              <a href="{{ site.social.weibo }}" class="hover:text-livingCoral">微博</a>#}
+              <a href="{{ site.social.bilibili }}" class="hover:text-livingCoral">B站</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <div class="prose prose-neutral dark:prose-invert mt-10" data-aos="fade-up" data-aos-delay="100">
-    <h2>本站</h2>
-    <p>这是一个使用 <strong>Eleventy</strong> 和 <strong>Tailwind CSS</strong> 构建的现代化静态博客，主题色为 <span class="brand">Living Coral</span>。</p>
-    <ul>
-      <li>暗黑模式一键切换</li>
-      <li>支持分类、标签与相关文章</li>
-      <li>适配移动端，加载迅速</li>
-    </ul>
-    <p>感谢Cursor对本项目的大力支持。</p>
+      <section class="prose prose-neutral dark:prose-invert" data-aos="fade-up" data-aos-delay="100">
+        <h2>本站</h2>
+        <p>这是一个使用 <strong>Eleventy</strong> 和 <strong>Tailwind CSS</strong> 构建的现代化静态博客，主题色为 <span class="brand">Living Coral</span>。</p>
+        <ul>
+          <li>暗黑模式一键切换</li>
+          <li>支持分类、标签与相关文章</li>
+          <li>适配移动端，加载迅速</li>
+        </ul>
+        <p>感谢Cursor对本项目的大力支持。</p>
+      </section>
+    </div>
+
+    {#<!-- 右侧友联侧边栏 -->
+    <div class="lg:w-80 space-y-6 sidebar-responsive" data-aos="fade-up" data-aos-delay="100">
+      <!-- 友联卡片 -->
+      <div class="card bg-gradient-to-br from-livingCoral/5 to-pink-500/5 dark:from-livingCoral/10 dark:to-pink-500/10 sidebar-card gradient-animate">
+        <h3 class="text-lg font-semibold mb-4 text-livingCoral">友情链接</h3>
+        
+        <!-- 友联列表容器，添加滚动条 -->
+        <div class="max-h-80 overflow-y-auto pr-2 space-y-3 friends-links-scroll" style="scrollbar-width: thin; scrollbar-color: rgba(252, 118, 106, 0.3) transparent;">
+          <!-- 示例友联，你可以根据实际情况修改 -->
+          <a href="https://example1.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-livingCoral/10 transition-colors sidebar-link">
+            <div class="w-2 h-2 bg-livingCoral rounded-full flex-shrink-0"></div>
+            <div class="min-w-0 flex-1">
+              <span class="text-sm font-medium block truncate">示例博客1</span>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">这是一个示例友联描述</p>
+            </div>
+          </a>
+          
+          <a href="https://example2.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-livingCoral/10 transition-colors sidebar-link">
+            <div class="w-2 h-2 bg-livingCoral rounded-full flex-shrink-0"></div>
+            <div class="min-w-0 flex-1">
+              <span class="text-sm font-medium block truncate">示例博客2</span>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">这是另一个示例友联描述</p>
+            </div>
+          </a>
+          
+          <a href="https://example3.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-livingCoral/10 transition-colors sidebar-link">
+            <div class="w-2 h-2 bg-livingCoral rounded-full flex-shrink-0"></div>
+            <div class="min-w-0 flex-1">
+              <span class="text-sm font-medium block truncate">示例博客3</span>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">第三个示例友联描述</p>
+            </div>
+          </a>
+          
+          <!-- 更多示例友联，展示滚动效果 -->
+          <a href="https://example4.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-livingCoral/10 transition-colors sidebar-link">
+            <div class="w-2 h-2 bg-livingCoral rounded-full flex-shrink-0"></div>
+            <div class="min-w-0 flex-1">
+              <span class="text-sm font-medium block truncate">示例博客4</span>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">第四个示例友联描述</p>
+            </div>
+          </a>
+          
+          <a href="https://example5.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-livingCoral/10 transition-colors sidebar-link">
+            <div class="w-2 h-2 bg-livingCoral rounded-full flex-shrink-0"></div>
+            <div class="min-w-0 flex-1">
+              <span class="text-sm font-medium block truncate">示例博客5</span>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">第五个示例友联描述</p>
+            </div>
+          </a>
+          
+          <a href="https://example6.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg hover:bg-livingCoral/10 transition-colors sidebar-link">
+            <div class="w-2 h-2 bg-livingCoral rounded-full flex-shrink-0"></div>
+            <div class="min-w-0 flex-1">
+              <span class="text-sm font-medium block truncate">示例博客6</span>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">第六个示例友联描述</p>
+            </div>
+          </a>
+        </div>
+        
+        <!-- 申请友联提示 -->
+        <div class="mt-4 pt-4 border-t border-livingCoral/20">
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mb-2">想要交换友链？</p>
+          <a href="mailto:{{ site.social.email }}?subject=友联申请" class="text-livingCoral hover:text-livingCoral/80 text-sm font-medium sidebar-link">联系我申请 →</a>
+        </div>
+      </div>
+    </div>#}
+
   </div>
-</section>
+</div>
 
 
