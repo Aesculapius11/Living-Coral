@@ -2,8 +2,8 @@
 title: 想让你的博客成为区块链的一部分吗，来玩玩Xlog吧
 description: 事情是这样的，我在刷B站的时候偶然间发现了这个叫Xlog的博客平台，当时看到这个平台是通过区块链来存储数据就觉得蛮有意思的，于是乎就打算来搞一个来玩玩。
 date: 2025-08-20
-tags: [博客, Xlog, 区块链]
-category: 白嫖怪出发
+tags: [Xlog, 区块链]
+category: 博客
 author: 星辰曦羽
 cover: https://img.antares.xin/xlog/1.webp
 layout: layouts/post.njk
