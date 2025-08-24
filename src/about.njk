@@ -8,35 +8,33 @@ permalink: /about/
 <div class="max-w-7xl mx-auto px-4 py-10">
   <div class="flex flex-col lg:flex-row gap-8">
     <!-- 左侧主要内容 -->
-    <div class="flex-1">
-      <section class="mb-10" data-aos="fade-up">
-        <div class="flex items-start gap-6">
-          <img src="{{ site.author.avatar }}" alt="avatar" class="w-24 h-24 rounded-full object-cover" />
-          <div>
-            <h1 class="text-2xl font-bold">{{ site.author.name }}</h1>
-            <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ site.author.bio }}</p>
-            <p class="mt-2 text-neutral-600 dark:text-neutral-400">坐标：{{ site.author.location }}</p>
-            <div class="mt-4 flex items-center gap-4">
-              <a href="{{ site.social.github }}" class="hover:text-livingCoral">GitHub</a>
-              <a href="{{ site.social.email }}" class="hover:text-livingCoral">邮箱</a>
-{#              <a href="{{ site.social.weibo }}" class="hover:text-livingCoral">微博</a>#}
-              <a href="{{ site.social.bilibili }}" class="hover:text-livingCoral">B站</a>
-            </div>
+<section class="max-w-3xl mx-auto px-4 py-10">
+  <div class="flex items-start gap-6" data-aos="fade-up">
+    <img src="{{ site.author.avatar }}" alt="avatar" class="w-24 h-24 rounded-full object-cover" />
+    <div>
+      <h1 class="text-2xl font-bold">{{ site.author.name }}</h1>
+      <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ site.author.bio }}</p>
+      <p class="mt-2 text-neutral-600 dark:text-neutral-400">坐标：{{ site.author.location }}</p>
+      <div class="mt-4 flex items-center gap-4">
+        <a href="{{ site.social.github }}" class="hover:text-livingCoral">GitHub</a>
+        <a href="{{ site.social.email }}" class="hover:text-livingCoral">邮箱</a>
+{#        <a href="{{ site.social.weibo }}" class="hover:text-livingCoral">微博</a>#}
+        <a href="{{ site.social.bilibili }}" class="hover:text-livingCoral">B站</a>
+      </div>
           </div>
-        </div>
-      </section>
+  </div>
 
-      <section class="prose prose-neutral dark:prose-invert" data-aos="fade-up" data-aos-delay="100">
-        <h2>本站</h2>
-        <p>这是一个使用 <strong>Eleventy</strong> 和 <strong>Tailwind CSS</strong> 构建的现代化静态博客，主题色为 <span class="brand">Living Coral</span>。</p>
-        <ul>
-          <li>暗黑模式一键切换</li>
-          <li>支持分类、标签与相关文章</li>
-          <li>适配移动端，加载迅速</li>
-        </ul>
-        <p>感谢Cursor对本项目的大力支持。</p>
-      </section>
-    </div>
+  <div class="prose prose-neutral dark:prose-invert mt-10" data-aos="fade-up" data-aos-delay="100">
+    <h2>本站</h2>
+    <p>这是一个使用 <strong>Eleventy</strong> 和 <strong>Tailwind CSS</strong> 构建的现代化静态博客，主题色为 <span class="brand">Living Coral</span>。</p>
+    <ul>
+      <li>暗黑模式一键切换</li>
+      <li>支持分类、标签与相关文章</li>
+      <li>适配移动端，加载迅速</li>
+    </ul>
+    <p>感谢Cursor对本项目的大力支持。</p>
+      </div>
+</section>
 
     {#<!-- 右侧友联侧边栏 -->
     <div class="lg:w-80 space-y-6 sidebar-responsive" data-aos="fade-up" data-aos-delay="100">
