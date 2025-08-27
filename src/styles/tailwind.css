@@ -37,6 +37,34 @@
     @apply text-neutral-800 dark:text-neutral-100;
   }
 
+  /* 移动端代码块优化 */
+  @media (max-width: 768px) {
+    .prose pre {
+      @apply text-sm leading-relaxed;
+    }
+    
+    .prose pre code {
+      @apply break-words whitespace-pre-wrap;
+    }
+    
+    /* 强制代码块在小屏幕上换行 */
+    .prose pre {
+      @apply whitespace-pre-wrap break-words;
+    }
+  }
+
+  /* 超小屏幕下的代码块处理 */
+  @media (max-width: 480px) {
+    .prose pre {
+      @apply text-xs px-3 py-2;
+    }
+    
+    /* 确保长行代码能够换行显示 */
+    .prose pre code {
+      @apply break-all;
+    }
+  }
+
   .prose code:not(pre code) {
     @apply rounded px-1.5 py-0.5 bg-livingCoral/10 dark:bg-livingCoral/20 text-livingCoral;
   }
