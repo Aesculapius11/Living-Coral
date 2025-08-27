@@ -11,6 +11,49 @@
     @apply p-5 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm;
   }
 
+  /* Typography enhancements */
+  .prose {
+    @apply leading-relaxed;
+  }
+
+  .prose h1, .prose h2, .prose h3 {
+    @apply tracking-tight font-semibold text-neutral-900 dark:text-neutral-100;
+  }
+
+  .prose a {
+    @apply text-neutral-900 dark:text-neutral-100 underline decoration-livingCoral/30 underline-offset-4 hover:decoration-livingCoral;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-livingCoral/40 bg-black/[0.03] dark:bg-white/[0.04] rounded-r-xl px-4 py-2 text-neutral-700 dark:text-neutral-200;
+  }
+
+  /* Code block styling */
+  .prose pre {
+    @apply relative rounded-xl border border-black/5 dark:border-white/10 shadow-sm overflow-x-auto bg-neutral-50 dark:bg-neutral-900;
+  }
+
+  .prose pre code {
+    @apply text-neutral-800 dark:text-neutral-100;
+  }
+
+  .prose code:not(pre code) {
+    @apply rounded px-1.5 py-0.5 bg-livingCoral/10 dark:bg-livingCoral/20 text-livingCoral;
+  }
+
+  /* Copy button for code blocks */
+  .copy-btn {
+    @apply absolute top-2 right-2 z-10 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium bg-white/80 dark:bg-neutral-800/80 backdrop-blur border border-black/10 dark:border-white/10 text-neutral-700 dark:text-neutral-200 opacity-0 transition;
+  }
+
+  .prose pre:hover .copy-btn {
+    @apply opacity-100;
+  }
+
+  .copy-btn.copied {
+    @apply bg-livingCoral text-white dark:text-white border-transparent;
+  }
+
   /* 自定义 Markdown 表格样式 */
   .prose table {
     @apply w-full text-sm border-separate border-spacing-0 rounded-xl overflow-hidden;

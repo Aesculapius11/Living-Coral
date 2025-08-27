@@ -3,6 +3,9 @@ function applyTheme(theme) {
   const root = document.documentElement;
   if (theme === 'dark') root.classList.add('dark');
   else root.classList.remove('dark');
+  // 同步浏览器地址栏主题色
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', (theme === 'dark') ? '#0a0a0a' : '#ffffff');
 }
 
 function initTheme() {
@@ -37,6 +40,26 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenu.classList.toggle('hidden');
     });
   }
+  // 为代码块添加复制按钮
+  try {
+    document.querySelectorAll('pre > code').forEach((codeEl) => {
+      const pre = codeEl.parentElement;
+      if (!pre || pre.querySelector('.copy-btn')) return;
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.type = 'button';
+      btn.innerHTML = '<span>复制</span>';
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(codeEl.textContent || '');
+          btn.classList.add('copied');
+          btn.innerHTML = '<span>已复制</span>';
+          setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<span>复制</span>'; }, 1500);
+        } catch (_) {}
+      });
+      pre.appendChild(btn);
+    });
+  } catch (_) {}
 });
 
 

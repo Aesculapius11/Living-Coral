@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% if title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{{ description or site.description }}" />
-    <meta name="theme-color" content="{{ site.themeColor }}" />
+    <meta id="theme-color" name="theme-color" content="#ffffff" />
      <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico" />
      <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico" />
      <link rel="icon" href="/assets/favicon.ico" sizes="any" />
@@ -27,6 +27,9 @@
           const t = localStorage.getItem('theme');
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           if (t === 'dark' || (!t && prefersDark)) document.documentElement.classList.add('dark');
+          // 初始化 theme-color
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', (document.documentElement.classList.contains('dark') ? '#0a0a0a' : '#ffffff'));
         }catch(e){}
       })();
     </script>
