@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PUBLIC_URL: /Living-Coral/
+      ELEVENTY_BASE_URL: /Living-Coral/
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
