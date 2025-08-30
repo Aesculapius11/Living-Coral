@@ -18,7 +18,7 @@ jobs:
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site/Living-Coral
+          path: ./Living-Coral
   deploy:
     needs: build
     runs-on: ubuntu-latest
