@@ -15,6 +15,7 @@
 - **互动功能**：Giscus 评论（可替换/移除），随主题自动切换
 - **多媒体**：APlayer 音乐播放器与歌词同步（示例资源可替换）
 - **分析与可选服务**：内置 Umami 脚本位（可自定义/移除）
+- **部署友好**：完整的 GitHub Pages 支持，自动处理子目录部署路径问题
 
 ---
 
@@ -41,6 +42,8 @@ npm run build
 ```
 
 产物将输出到 `_site/` 目录，可直接部署到任意静态托管平台。
+
+**部署提示**：如需部署到 GitHub Pages 子目录，请参考下方的部署章节配置正确的环境变量。
 
 脚本摘要（详见 `package.json`）：
 - `dev`：并行启动 11ty 本地服务与 Tailwind 监听
@@ -134,10 +137,42 @@ src/
 - Vercel：Framework 选 Other；Build Command `npm run build`；Output `_site`
 - Cloudflare Pages：Build `npm run build`；Output Directory `_site`
 
-示例 GitHub Actions（可选）：
+### GitHub Pages 部署（推荐）
+
+本项目已配置完整的 GitHub Actions 工作流，支持子目录部署（如 `username.github.io/repository-name/`）。
+
+#### 自动部署配置
+
+1. **仓库设置**：
+   - 确保仓库名为 `username.github.io`（用户页面）或任意名称（项目页面）
+   - 在 Settings > Pages 中启用 GitHub Pages
+
+2. **工作流文件**：
+   - 已包含 `.github/workflows/GitHub-Pages.yml`
+   - 自动设置正确的 base URL 环境变量
+   - 支持缓存和优化的构建流程
+
+3. **路径配置**：
+   - 项目已配置 Eleventy 的 `pathPrefix` 支持
+   - 所有静态资源和链接都会自动添加正确的前缀
+   - 支持子目录部署，不会出现 404 错误
+
+#### 手动部署步骤
+
+如果使用手动部署，需要设置环境变量：
+
+```bash
+# 设置正确的 base URL（根据你的部署路径调整）
+export ELEVENTY_BASE_URL="/your-repo-name/"
+
+# 构建项目
+npm run build
+```
+
+#### 示例 GitHub Actions 配置
 
 ```yaml
-name: Deploy to GitHub Pages
+name: GitHub Pages
 on:
   push:
     branches: [ master ]
@@ -148,16 +183,29 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ELEVENTY_BASE_URL: /Living-Coral/  # 根据你的仓库设置调整
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build site
+        run: npm run build
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+          
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -165,9 +213,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
 ```
+
+**重要提示**：将 `ELEVENTY_BASE_URL` 中的 `/Living-Coral/` 替换为你的实际仓库名称。
 
 ---
 
@@ -179,6 +230,13 @@ jobs:
   - 确保在运行 `npm run dev`（Tailwind 处于 watch）
 - 资源应放在哪？
   - 页面中使用 `/assets/...` 路径，源文件应位于 `src/assets`，构建后会复制到 `_site/assets`
+- 部署到 GitHub Pages 后出现 404 错误？
+  - 确保设置了正确的 `ELEVENTY_BASE_URL` 环境变量
+  - 检查 `.github/workflows/GitHub-Pages.yml` 中的路径配置
+  - 所有静态资源和链接都会自动添加正确的前缀
+- 如何修改部署路径？
+  - 更新 `.github/workflows/GitHub-Pages.yml` 中的 `ELEVENTY_BASE_URL` 值
+  - 本地构建时设置环境变量：`export ELEVENTY_BASE_URL="/your-path/"`
 
 ---
 

@@ -61,6 +61,7 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
+    pathPrefix: process.env.ELEVENTY_BASE_URL || "/",
   };
 };
 

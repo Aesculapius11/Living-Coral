@@ -14,7 +14,7 @@ eleventyComputed:
   <div class="grid gap-6 md:grid-cols-3">
     {% for p in collections.posts %}
       {% if p.data.category == cat %}
-      <a href="{{ p.url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition">
+      <a href="{{ p.url | url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition">
         {% if p.data.cover %}
         <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
           <img src="{{ p.data.cover }}" alt="{{ p.data.title }}" class="w-full h-full object-cover" loading="lazy" />

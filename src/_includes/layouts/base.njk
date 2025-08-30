@@ -6,13 +6,13 @@
     <title>{% if title %}{{ title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{{ description or site.description }}" />
     <meta id="theme-color" name="theme-color" content="#ffffff" />
-     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico" />
-     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico" />
-     <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon.ico' | url }}" />
+     <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon.ico' | url }}" />
+     <link rel="icon" href="{{ '/assets/favicon.ico' | url }}" sizes="any" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
     <script defer src="https://cloud.umami.is/script.js" data-website-id="54bf0eb6-e9fe-4e83-921e-6ca6b90191cc"></script>
     <style>
@@ -43,13 +43,13 @@
 
     {% include "../components/footer.njk" %}
 
-    <script src="/assets/main.js"></script>
+    <script src="{{ '/assets/main.js' | url }}"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic'});</script>
 
-    <script src="/assets/scroll.js"></script>
+    <script src="{{ '/assets/scroll.js' | url }}"></script>
     <button id="scrollToTopBtn" title="回到顶部" class="fixed bottom-8 right-8 z-50 shadow-lg transition-opacity duration-300 focus:outline-none focus:ring-brand dark:focus:ring-brand/50 hidden">
-    <img src="/assets/scroll.png" alt="回到顶部">
+    <img src="{{ '/assets/scroll.png' | url }}" alt="回到顶部">
     </button>
 
   </body>

@@ -14,8 +14,8 @@ title: 首页
     <h1 class="mt-6 text-3xl md:text-4xl font-bold text-white drop-shadow">{{ site.author.name }}</h1>
     <p class="mt-3 text-white/90 max-w-2xl mx-auto">{{ site.description }}</p>
     <div class="mt-6 flex items-center justify-center gap-4">
-      <a href="/blog/" class="btn-brand px-5 py-2 rounded-full shadow-soft">进入博客</a>
-      <a href="/about/" class="px-5 py-2 rounded-full bg-white/90 text-neutral-900 hover:bg-white">关于我</a>
+      <a href="{{ '/blog/' | url }}" class="btn-brand px-5 py-2 rounded-full shadow-soft">进入博客</a>
+      <a href="{{ '/about/' | url }}" class="px-5 py-2 rounded-full bg-white/90 text-neutral-900 hover:bg-white">关于我</a>
     </div>
     <div class="mt-6 flex items-center justify-center gap-5 text-white/90">
       <a href="{{ site.social.github }}" class="hover:text-livingCoral">GitHub</a>
@@ -33,7 +33,7 @@ title: 首页
   {% if latest.length > 0 %}
   <div class="grid gap-6 md:grid-cols-3">
     {% for post in latest %}
-    <a href="{{ post.url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+    <a href="{{ post.url | url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
       {% if post.data.cover %}
       <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
         <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" class="w-full h-full object-cover" loading="lazy" />
@@ -57,9 +57,9 @@ title: 首页
 </section>
 
 <div id="player"  class="aplayer"></div>
-<link href="assets/APlayer.min_v1.10.1.css" rel="stylesheet">
-<script src="assets/APlayer.min_v1.10.1.js"></script>
+<link href="{{ '/assets/APlayer.min_v1.10.1.css' | url }}" rel="stylesheet">
+<script src="{{ '/assets/APlayer.min_v1.10.1.js' | url }}"></script>
 
-<script src="assets/aplayer.js"></script>
+<script src="{{ '/assets/aplayer.js' | url }}"></script>
 
 

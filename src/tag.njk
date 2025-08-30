@@ -13,7 +13,7 @@ eleventyComputed:
   <h1 class="text-2xl font-bold mb-6">#{{ tag }}</h1>
   <div class="grid gap-6 md:grid-cols-3">
     {% for post in collections[tag] %}
-    <a href="{{ post.url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition">
+    <a href="{{ post.url | url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition">
       {% if post.data.cover %}
       <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
         <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" class="w-full h-full object-cover" loading="lazy" />

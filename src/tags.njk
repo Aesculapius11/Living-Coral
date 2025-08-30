@@ -8,7 +8,7 @@ permalink: /tags/
   <h1 class="text-2xl font-bold mb-6">标签</h1>
   <div class="flex flex-wrap gap-3">
     {% for tag in collections.tagList %}
-      <a href="/tags/{{ tag | url }}/" class="px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 hover:bg-livingCoral/20 hover:text-livingCoral transition">#{{ tag }}</a>
+      <a href="{{ '/tags/' | url }}{{ tag | url }}/" class="px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 hover:bg-livingCoral/20 hover:text-livingCoral transition">#{{ tag }}</a>
     {% endfor %}
   </div>
 </section>
