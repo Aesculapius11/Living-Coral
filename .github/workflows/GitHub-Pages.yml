@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ELEVENTY_BASE_URL: /Living-Coral/
+      SITE_BASE_URL: https://aesculapius11.github.io
     steps:
       - name: Checkout
         uses: actions/checkout@v4

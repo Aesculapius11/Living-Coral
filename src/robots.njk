@@ -5,4 +5,4 @@ eleventyExcludeFromCollections: true
 User-agent: *
 Allow: /
 
-Sitemap: https://www.antares.xin/sitemap.xml
+Sitemap: {{ env.SITE_BASE_URL or site.baseUrl }}/sitemap.xml

@@ -1,6 +1,11 @@
 const { DateTime } = require("luxon");
 
 module.exports = function (eleventyConfig) {
+  // 添加全局数据，将环境变量传递给模板
+  eleventyConfig.addGlobalData("env", {
+    SITE_BASE_URL: process.env.SITE_BASE_URL
+  });
+
   // 静态资源直拷
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/scripts": "assets" });
@@ -53,7 +58,10 @@ module.exports = function (eleventyConfig) {
 
   // 站点地图集合
   eleventyConfig.addCollection("sitemap", (collectionApi) => {
-    const baseUrl = "https://www.antares.xin";
+    // 优先使用环境变量，其次使用站点配置，最后使用默认值
+    const baseUrl = process.env.SITE_BASE_URL || 
+                   collectionApi.getAll()[0]?.data?.site?.baseUrl || 
+                   "https://www.antares.xin";
     const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
     
     const urls = [
