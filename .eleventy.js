@@ -59,6 +59,22 @@ module.exports = function (eleventyConfig) {
     return [...catSet].sort();
   });
 
+  // 搜索索引集合
+  eleventyConfig.addCollection("searchIndex", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/blog/*.md").map((item) => {
+      return {
+        title: item.data.title || "",
+        description: item.data.description || "",
+        tags: item.data.tags || [],
+        category: item.data.category || "",
+        date: item.date,
+        url: `/blog/${item.fileSlug}/`,
+        excerpt: item.data.excerpt || "",
+        cover: item.data.cover || ""
+      };
+    });
+  });
+
   // 站点地图集合
   eleventyConfig.addCollection("sitemap", (collectionApi) => {
     // 优先使用环境变量，其次使用站点配置，最后使用默认值
@@ -85,6 +101,12 @@ module.exports = function (eleventyConfig) {
         lastmod: new Date().toISOString(),
         changefreq: "daily",
         priority: 0.9
+      },
+      {
+        url: `${baseUrl}${pathPrefix}search/`,
+        lastmod: new Date().toISOString(),
+        changefreq: "weekly",
+        priority: 0.8
       },
       {
         url: `${baseUrl}${pathPrefix}categories/`,
