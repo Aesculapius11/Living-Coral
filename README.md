@@ -4,6 +4,13 @@
 
 ---
 
+## 📱 网站界面展示
+
+![网站主页展示](1.png)
+![博客界面展示](2.png)
+
+---
+
 ## 特性
 
 - **技术栈**：Eleventy（轻量静态站点生成）、Tailwind CSS（原子化样式）、PostCSS、AOS 动效
@@ -120,12 +127,90 @@ src/
 - **Giscus 评论**（位于 `layouts/post.njk`，容器 `#giscus-container`）
   1. 在 Giscus 官网生成仓库与分类的配置
   2. 将 `data-repo`、`data-repo-id`、`data-category`、`data-category-id` 替换为你的值
-  3. 若不需要评论，删除文章页“评论区”模块
+  3. 若不需要评论，删除文章页"评论区"模块
 
 - **APlayer 播放器**
   - 资源：`src/assets/APlayer.min_v1.10.1.*`
   - 播放列表/歌词：`src/assets/musics/` 与 `src/scripts/aplayer.js`
   - 构建后可从 `_site/assets/` 访问
+
+---
+
+## 🗺️ 站点地图功能
+
+本博客已集成完整的站点地图系统，支持自动生成 XML 站点地图和 robots.txt 文件，提升搜索引擎优化（SEO）效果。
+
+### ✨ 主要特性
+
+- **自动生成**：每次构建时自动更新站点地图
+- **智能 URL 管理**：包含所有博客文章、分类页面和标签页面
+- **SEO 优化**：设置合理的更新频率和优先级
+- **多环境支持**：支持本地开发、测试环境和生产环境的不同配置
+
+### 🔧 使用方法
+
+#### 1. 自动配置（推荐）
+
+站点地图会自动从以下优先级获取 baseUrl：
+
+1. **环境变量** `SITE_BASE_URL` (最高优先级)
+2. **站点配置** `src/_data/site.json` 中的 `baseUrl` 字段
+3. **默认值** `https://www.antares.xin` (最低优先级)
+
+#### 2. 环境变量配置
+
+```bash
+# Windows PowerShell
+$env:SITE_BASE_URL="https://your-domain.com"; npm run build
+
+# Linux/macOS
+SITE_BASE_URL=https://your-domain.com npm run build
+```
+
+#### 3. 站点配置文件
+
+编辑 `src/_data/site.json`：
+
+```json
+{
+  "title": "星辰曦羽的站点",
+  "baseUrl": "https://www.antares.xin",
+  // ... 其他配置
+}
+```
+
+#### 4. GitHub Actions 部署
+
+在 `.github/workflows/GitHub-Pages.yml` 中已配置：
+
+```yaml
+env:
+  SITE_BASE_URL: https://aesculapius11.github.io
+```
+
+### 📁 生成的文件
+
+- `_site/sitemap.xml` - 完整的 XML 站点地图
+- `_site/robots.txt` - 搜索引擎爬虫配置文件
+
+### 🌐 访问地址
+
+部署后可通过以下地址访问：
+
+- **站点地图**：`https://your-domain.com/sitemap.xml`
+- **爬虫配置**：`https://your-domain.com/robots.txt`
+
+### 📈 SEO 优化设置
+
+站点地图已针对不同类型的内容设置了优化的参数：
+
+- **主页**：优先级 1.0，每日更新
+- **博客列表**：优先级 0.9，每日更新  
+- **关于页面**：优先级 0.8，每月更新
+- **分类/标签页**：优先级 0.7，每周更新
+- **博客文章**：优先级 0.6，每月更新
+- **分类详情**：优先级 0.5，每周更新
+- **标签详情**：优先级 0.5，每周更新
 
 ---
 
@@ -139,7 +224,7 @@ src/
 
 ### GitHub Pages 部署（推荐）
 
-本项目已配置完整的 GitHub Actions 工作流，支持子目录部署（如 `username.github.io/repository-name/`）。
+本项目已配置完整的 GitHub Actions 工作流，支持子目录部署（如 `username.github.io/repository-name/`），并自动生成站点地图。
 
 #### 自动部署配置
 
@@ -156,6 +241,7 @@ src/
    - 项目已配置 Eleventy 的 `pathPrefix` 支持
    - 所有静态资源和链接都会自动添加正确的前缀
    - 支持子目录部署，不会出现 404 错误
+   - 站点地图会自动使用正确的 baseUrl 和路径前缀
 
 #### 手动部署步骤
 
@@ -218,7 +304,7 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-**重要提示**：将 `ELEVENTY_BASE_URL` 中的 `/Living-Coral/` 替换为你的实际仓库名称。
+**重要提示**：将 `ELEVENTY_BASE_URL` 中的 `/Living-Coral/` 替换为你的实际仓库名称。站点地图会自动使用正确的 baseUrl 和路径前缀。
 
 ---
 
@@ -237,6 +323,13 @@ jobs:
 - 如何修改部署路径？
   - 更新 `.github/workflows/GitHub-Pages.yml` 中的 `ELEVENTY_BASE_URL` 值
   - 本地构建时设置环境变量：`export ELEVENTY_BASE_URL="/your-path/"`
+- 站点地图没有正确生成？
+  - 确保运行了 `npm run build` 命令
+  - 检查 `src/_data/site.json` 中是否设置了 `baseUrl`
+  - 验证环境变量 `SITE_BASE_URL` 是否正确设置
+- 如何自定义站点地图的更新频率和优先级？
+  - 编辑 `.eleventy.js` 文件中的 `sitemap` 集合配置
+  - 可以调整不同类型页面的 `changefreq` 和 `priority` 值
 
 ---
 
