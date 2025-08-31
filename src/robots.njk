@@ -5,4 +5,4 @@ eleventyExcludeFromCollections: true
 User-agent: *
 Allow: /
 
-Sitemap: {{ env.SITE_BASE_URL or site.baseUrl }}/sitemap.xml
+Sitemap: {{ env.SITE_BASE_URL or site.baseUrl }}{{ pathPrefix }}sitemap.xml

@@ -6,6 +6,9 @@ module.exports = function (eleventyConfig) {
     SITE_BASE_URL: process.env.SITE_BASE_URL
   });
 
+  // 添加路径前缀到全局数据
+  eleventyConfig.addGlobalData("pathPrefix", process.env.ELEVENTY_BASE_URL || "/");
+
   // 静态资源直拷
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/scripts": "assets" });
