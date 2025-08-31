@@ -57,7 +57,7 @@ description: 搜索博客文章
       "tags": [{% for tag in item.tags %}"{{ tag }}"{% if not loop.last %},{% endif %}{% endfor %}],
       "category": "{{ item.category | replace('"', '\\"') }}",
       "date": "{{ item.date }}",
-      "url": "{{ item.url }}",
+                   "url": "{{ item.url }}",
       "excerpt": "{{ item.excerpt | replace('"', '\\"') }}",
       "cover": "{{ item.cover | replace('"', '\\"') }}"
     }{% if not loop.last %},{% endif %}

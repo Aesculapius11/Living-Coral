@@ -61,6 +61,7 @@ module.exports = function (eleventyConfig) {
 
   // 搜索索引集合
   eleventyConfig.addCollection("searchIndex", (collectionApi) => {
+    const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
     return collectionApi.getFilteredByGlob("src/blog/*.md").map((item) => {
       return {
         title: item.data.title || "",
@@ -68,7 +69,7 @@ module.exports = function (eleventyConfig) {
         tags: item.data.tags || [],
         category: item.data.category || "",
         date: item.date,
-        url: `/blog/${item.fileSlug}/`,
+        url: `${pathPrefix}blog/${item.fileSlug}/`,
         excerpt: item.data.excerpt || "",
         cover: item.data.cover || ""
       };
