@@ -142,8 +142,14 @@ class BlogSearch {
       }
     });
 
-    // 按分数排序
-    return results.sort((a, b) => b.score - a.score);
+    // 按分数排序；若分数相同则按日期新→旧，再按原索引稳定
+    return results.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      const aTime = a.date ? new Date(a.date).getTime() : 0;
+      const bTime = b.date ? new Date(b.date).getTime() : 0;
+      if (bTime !== aTime) return bTime - aTime;
+      return a.index - b.index;
+    });
   }
 
   // 显示搜索结果
