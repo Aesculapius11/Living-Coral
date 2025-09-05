@@ -19,9 +19,9 @@
   .prose h1, .prose h2, .prose h3 {
     @apply tracking-tight font-semibold text-neutral-900 dark:text-neutral-100;
   }
-
+    /* 链接样式 */
   .prose a {
-    @apply text-neutral-900 dark:text-neutral-100 underline decoration-livingCoral/30 underline-offset-4 hover:decoration-livingCoral;
+    @apply text-neutral-900 dark:text-neutral-100 underline decoration-livingCoral/30 dark:decoration-livingCoral/40 underline-offset-4 hover:decoration-livingCoral dark:hover:decoration-livingCoral;
   }
 
   .prose blockquote {
@@ -64,7 +64,7 @@
       @apply break-all;
     }
   }
-
+    /* 行内代码样式 */
   .prose code:not(pre code) {
     @apply rounded px-1.5 py-0.5 bg-livingCoral/10 dark:bg-livingCoral/20 text-livingCoral;
   }
