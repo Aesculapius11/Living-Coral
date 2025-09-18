@@ -76,3 +76,5 @@ GOVERNOR="conservative"
 MAX_SPEED="0000"
 MIN_SPEED="0000"
 ```
+ 
+>查看CPU频率：cat /proc/cpuinfo | grep MHz
