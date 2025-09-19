@@ -1,11 +1,11 @@
 ---
 title: PVE折腾日记——CPU频率调整（失败）
-description: PVE折腾日记——CPU频率调整（失败）.md
+description: PVE折腾日记——CPU频率调整（失败）
 date: 2025-09-18
 tags: [PVE, 服务器]
 category: 杂项
 author: 星辰曦羽
-cover: https://img.antares.xin/mail/1.webp
+cover: https://img.antares.xin/PVE/1.webp
 layout: layouts/post.njk
 ---
 处理器为2696 v3  
