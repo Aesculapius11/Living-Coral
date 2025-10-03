@@ -417,7 +417,7 @@
 
 #scrollToTopBtn.visible {
   opacity: 1; /* 可见状态,显示，动画完成后设置为可见 */
-  top: -70px;/*下落动画完成后，距离顶部-70*/
+  top: -15vh;/*下落动画完成后，距离顶部-70*/
 }
 
 #scrollToTopBtn.hidden {
