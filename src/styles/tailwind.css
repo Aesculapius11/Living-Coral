@@ -25,6 +25,29 @@
     @apply text-neutral-900 dark:text-neutral-100 underline decoration-livingCoral/30 dark:decoration-livingCoral/40 underline-offset-4 hover:decoration-livingCoral dark:hover:decoration-livingCoral;
   }
 
+  /* 文章内图片样式 */
+  .prose img {
+    @apply mx-auto rounded-xl border border-black/5 dark:border-white/10 shadow-sm transition-transform duration-200 ease-out;
+  }
+
+  /* 图片带链接时的悬停轻微放大效果 
+  .prose a img {
+    @apply transition-transform duration-200 ease-out;
+  }
+  .prose a:hover img {
+    @apply scale-105;
+  }
+
+   所有图片的悬停放大（未包裹链接也生效） 
+  .prose img:hover { @apply scale-105; }*/
+
+  /* figure / figcaption 支持 */
+  .prose figure { @apply my-6; }
+  .prose figure > img { @apply my-0; }
+  .prose figure figcaption {
+    @apply mt-2 text-sm text-neutral-500 dark:text-neutral-400 text-center;
+  }
+
   .prose blockquote {
     @apply border-l-4 border-livingCoral/40 bg-black/[0.03] dark:bg-white/[0.04] rounded-r-xl px-4 py-2 text-neutral-700 dark:text-neutral-200;
   }
