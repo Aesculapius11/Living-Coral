@@ -1,5 +1,5 @@
 ---
-title: 使用nginx对mc服务器进行反向代理并获取真实玩家IP
+title: 使用nginx对mc服务器进行反向代理并获取玩家真实IP
 description: 通过nginx对mc服务器进行反向代理，隐藏源站ip并实现负载均衡，通过proxy protocol协议获取玩家真实IP
 date: 2025-10-08
 tags: [MC, nginx, 服务器]

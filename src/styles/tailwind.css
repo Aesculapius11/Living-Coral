@@ -372,7 +372,7 @@
 }
 
 /* Apply the floating animation */
-#scrollToTopBtn.float img {
+#scrollToTopBtn.float {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -401,12 +401,12 @@
 }
 
 /* 应用下落动画*/
-#scrollToTopBtn.fall-down img {
+#scrollToTopBtn.fall-down {
   animation: fall 0.5s ease-out forwards;
 }
 
 /* 应用上升动画 */
-#scrollToTopBtn.rise-up img {
+#scrollToTopBtn.rise-up {
   animation: rise 0.5s ease-out forwards;
 }
 
@@ -420,10 +420,12 @@
   position: fixed;
   top: -50px; /* 初始位置，紧贴顶部 */
   right: 8px;
+  bottom: auto; /* 避免与类名 bottom-8 冲突 */
   z-index: 50;
   box-shadow: none;
   transition: opacity 0.3s ease-in-out, top 0.5s ease-out; /* 平滑过渡 opacity 和 top */
   opacity: 0; /* 初始状态完全透明 */
+  line-height: 0; /* 去除可能的基线空隙 */
 }
 
 #scrollToTopBtn img {
@@ -439,7 +441,63 @@
 
 #scrollToTopBtn.visible {
   opacity: 1; /* 可见状态,显示，动画完成后设置为可见 */
-  top: -33vh;/*下落动画完成后，距离顶部-70*/
+  top: -1700px;/*下落动画完成后，距离顶部-70*/
+}
+
+/* 根据高度调整 */
+@media (min-height: 500px) {
+  #scrollToTopBtn.visible {
+    top: -1550px;
+  }
+}
+
+/* 根据高度调整 */
+@media (min-height: 600px) {
+  #scrollToTopBtn.visible {
+    top: -1450px;
+  }
+}
+
+/* 根据高度调整 */
+@media (min-height: 750px) {
+  #scrollToTopBtn.visible {
+    top: -1250px;
+  }
+}
+
+/* 根据高度调整 */
+@media (min-height: 1000px) {
+  #scrollToTopBtn.visible {
+    top: -1050px;
+  }
+}
+
+/* 根据高度调整 */
+@media (min-height: 1250px) {
+  #scrollToTopBtn.visible {
+    top: -800px;
+  }
+}
+
+/* 屏幕较高时，提升上移幅度 */
+@media (min-height: 1500px) {
+  #scrollToTopBtn.visible {
+    top: -550px;
+  }
+}
+
+/* 屏幕较高时，提升上移幅度 */
+@media (min-height: 1750px) {
+  #scrollToTopBtn.visible {
+    top: -300px;
+  }
+}
+
+/* 屏幕较高时，提升上移幅度 */
+@media (min-height: 2000px) {
+  #scrollToTopBtn.visible {
+    top: -50px;
+  }
 }
 
 #scrollToTopBtn.hidden {
