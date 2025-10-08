@@ -53,12 +53,34 @@
   }
 
   /* Code block styling */
-  .prose pre {
+
+  /* 非 Prism 代码块（无 language-*）使用站点原有配色 */
+  .prose pre:not([class*="language-"]):not(:has(> code[class*="language-"])) {
     @apply relative rounded-xl border border-black/5 dark:border-white/10 shadow-sm overflow-x-auto bg-neutral-50 dark:bg-neutral-900;
   }
 
-  .prose pre code {
+  .prose pre:not([class*="language-"]):not(:has(> code[class*="language-"])) code {
     @apply text-neutral-800 dark:text-neutral-100 break-words whitespace-pre-wrap;
+  }
+
+  /* Prism 代码块：外层容器保持站点背景与边框（覆盖 Prism 背景） */
+  .prose pre[class*="language-"],
+  .prose pre:has(> code[class*="language-"]) {
+    @apply relative rounded-xl border border-black/5 dark:border-white/10 shadow-sm overflow-x-auto;
+    background-color: rgb(250 250 250 / 1) !important; /* Tailwind neutral-50 */
+  }
+  .dark .prose pre[class*="language-"],
+  .dark .prose pre:has(> code[class*="language-"]) {
+    background-color: rgb(23 23 23 / 1) !important; /* Tailwind neutral-900 */
+  }
+  /* Prism 代码颜色由主题接管，这里不设置颜色，避免覆盖 token */
+
+  /* 通用：代码块自动换行（不影响行内代码） */
+  .prose pre,
+  .prose pre code {
+    white-space: pre-wrap; /* 保留换行并允许折行 */
+    overflow-wrap: anywhere; /* 长单词/URL 也强制换行 */
+    word-break: break-word; /* 兼容性兜底 */
   }
 
   /* 移动端代码块优化 */

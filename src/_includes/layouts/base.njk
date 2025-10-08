@@ -23,6 +23,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <!-- Prism 浅/深色主题（供 @11ty/eleventy-plugin-syntaxhighlight 使用） -->
+    <link id="prism-theme-light" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" disabled>
+    <link id="prism-theme-dark" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" disabled>
+    <script>
+      (function(){
+        try{
+          var html = document.documentElement;
+          var light = document.getElementById('prism-theme-light');
+          var dark = document.getElementById('prism-theme-dark');
+          function apply(){
+            var isDark = html.classList.contains('dark');
+            if (light && dark){
+              light.disabled = !!isDark;
+              dark.disabled = !isDark;
+            }
+          }
+          apply();
+          // 监听 class 变化以便主题切换时更新
+          var mo = new MutationObserver(apply);
+          mo.observe(html, { attributes: true, attributeFilter: ['class'] });
+        }catch(e){}
+      })();
+    </script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="54bf0eb6-e9fe-4e83-921e-6ca6b90191cc"></script>
     <style>
       :root { --brand: {{ site.themeColor }}; }

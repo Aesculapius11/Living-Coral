@@ -1,6 +1,17 @@
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { DateTime } = require("luxon");
 
 module.exports = function (eleventyConfig) {
+  // 构建期语法高亮（Prism）；添加语言别名
+  eleventyConfig.addPlugin(syntaxHighlight, {
+    init: ({ Prism }) => {
+      try {
+        Prism.languages.shell = Prism.languages.bash;
+        Prism.languages.sh = Prism.languages.bash;
+        Prism.languages.conf = Prism.languages.ini || Prism.languages.conf;
+      } catch (e) {}
+    },
+  });
   // 添加全局数据，将环境变量传递给模板
   eleventyConfig.addGlobalData("env", {
     SITE_BASE_URL: process.env.SITE_BASE_URL
