@@ -296,7 +296,7 @@ Workbench输入密码
 按i进行输入  
     输入以下内容
 
-```
+```ini
 [Unit]
 Description=TeamSpeak 3 Server
 After=network.target

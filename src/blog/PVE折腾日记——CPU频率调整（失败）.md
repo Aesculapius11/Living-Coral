@@ -27,50 +27,69 @@ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 | schedutil   | 负载变化回调机制，后面新引入的机制，通过触发 schedutil sugov_update 进行调频动作。                                                    |
 
 检测CPU是否支持睿频
+
 ```shell
 grep -c 'physical id' /proc/cpuinfo
 ```
+
 输出36，大于0说明可以睿频
 
 修改启动项
+
 ```shell
 vim /etc/default/grub
 ```
+
 修改配置文件中的一行内容，修改为如下
-```
+
+```shell
 GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=disable"
 ```
+
 退出后更更新grub
-```
+
+```shell
 update-grub
 ```
+
 安装cpufrequtils
-```
+
+```shell
 apt-get install cpufrequtils
 ```
+
 查看CPU
-```
+
+```shell
 cpufreq-info
 ```
+
 编辑文件
-```
+
+```shell
 vim /etc/init.d/cpufrequtils
 ```
+
 修改内容
-```
+
+```shell
 ENABLE="true"
 GOVERNOR="conservative"
 MAX_SPEED="3200"
 MIN_SPEED="2200"
 ```
+
 重启服务
-```
+
+```shell
 systemctl daemon-reload
 /etc/init.d/cpufrequtils restart
 ```
+
 后面发现问题，一直在最低速度上，速度不会上去，而且功耗基本没降  
 重新修改，换回性能模式，必须是0000，否则无效
-```
+
+```shell
 ENABLE="true"
 GOVERNOR="conservative"
 MAX_SPEED="0000"
