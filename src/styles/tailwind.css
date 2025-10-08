@@ -86,7 +86,7 @@
   /* 移动端代码块优化 */
   @media (max-width: 768px) {
     .prose pre {
-      @apply text-sm leading-relaxed;
+      @apply text-sm leading-relaxed w-full;
     }
     
     .prose pre code {
@@ -97,17 +97,31 @@
     .prose pre {
       @apply whitespace-pre-wrap break-words;
     }
+
+    /* 行内代码在小屏幕上也可换行并任意断词，避免卡住布局 */
+    .prose code:not(pre code) {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      max-width: 100%;
+      display: inline-block;
+    }
   }
 
   /* 超小屏幕下的代码块处理 */
   @media (max-width: 480px) {
     .prose pre {
-      @apply text-xs px-3 py-2;
+      @apply text-xs px-3 py-2 w-full;
     }
     
     /* 确保长行代码能够换行显示 */
     .prose pre code {
       @apply break-all;
+    }
+
+    /* 行内代码进一步激进断词，杜绝溢出 */
+    .prose code:not(pre code) {
+      word-break: break-all;
     }
   }
     /* 行内代码样式 */
