@@ -45,7 +45,7 @@ layout: layouts/base.njk
     <header class="mb-8">
       {% if cover %}
       <div class="h-56 md:h-72 w-full rounded-2xl overflow-hidden shadow-soft mb-6">
-        <img src="{{ cover }}" alt="{{ title }}" class="w-full h-full object-cover"/>
+        <img src="{{ cover }}" alt="{{ title }}" class="w-full h-full object-cover" fetchpriority="high" loading="eager" decoding="async"/>
       </div>
       {% endif %}
       <h1 class="text-3xl md:text-4xl font-bold mb-3" data-aos="fade-up">{{ title }}</h1>
@@ -116,13 +116,13 @@ layout: layouts/base.njk
     <section class="mt-12 p-6 rounded-2xl bg-black/[0.03] dark:bg-white/[0.03]" data-aos="fade-up" data-aos-delay="200">
       <h2 class="text-xl font-semibold mb-4">评论区</h2>
        <div id="giscus-container"></div>
-      <script src="{{ '/assets/post-comments.js' | url }}"></script>
+      <script defer src="{{ '/assets/post-comments.js' | url }}"></script>
     </section>
   </article>
 </div>
 
 <!-- 大纲栏JavaScript -->
-<script src="{{ '/assets/post-toc.js' | url }}"></script>
+<script defer src="{{ '/assets/post-toc.js' | url }}"></script>
 
 
 

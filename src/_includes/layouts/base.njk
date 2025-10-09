@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="{{ '/assets/favicon-180.png' | url }}" /> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
     <!-- Prism 浅/深色主题（供 @11ty/eleventy-plugin-syntaxhighlight 使用） -->
@@ -76,11 +76,11 @@
 
     {% include "../components/footer.njk" %}
 
-    <script src="{{ '/assets/main.js' | url }}"></script>
+    <script defer src="{{ '/assets/main.js' | url }}"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic'});</script>
 
-    <script src="{{ '/assets/scroll.js' | url }}"></script>
+    <script defer src="{{ '/assets/scroll.js' | url }}"></script>
     <button id="scrollToTopBtn" title="回到顶部" class="fixed bottom-8 right-8 z-50 shadow-lg transition-opacity duration-300 focus:outline-none focus:ring-brand dark:focus:ring-brand/50 hidden">
     <img src="{{ '/assets/scroll.png' | url }}" alt="回到顶部">
     </button>
