@@ -4,6 +4,7 @@ description: 使用Cloudflare和Resend的免费服务来自建一个域名临时
 date: 2025-09-05
 tags: [邮箱, 域名]
 category: 杂项
+keywords: [邮箱, 域名, Github, Cloudflare]
 author: 星辰曦羽
 cover: https://img.antares.xin/mail/1.webp
 layout: layouts/post.njk

@@ -4,6 +4,7 @@ description: 之前为了连麦打游戏有个更好的体验，就去网上研�
 date: 2023-12-11
 tags: [连麦, 游戏, 云服务器]
 category: 技术
+keywords: [Teamspeak, 游戏, 服务器, 云服务器, 连麦, 技术教程]
 author: 星辰曦羽
 cover: https://img.antares.xin/ts/40.avif
 layout: layouts/post.njk

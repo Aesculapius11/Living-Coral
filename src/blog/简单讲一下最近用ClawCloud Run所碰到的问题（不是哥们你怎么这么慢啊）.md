@@ -4,6 +4,7 @@ description: ClawCloud Run，这玩意儿是一个类似于 Vercel、Netlify 的
 date: 2025-08-01
 tags: [爪子云, CDN]
 category: 白嫖怪出发
+keywords: [爪子云, CDN, ClawCloud]
 author: 星辰曦羽
 cover: https://img.antares.xin/claw-1/1.webp
 layout: layouts/post.njk

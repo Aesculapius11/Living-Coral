@@ -4,6 +4,7 @@ description: 通过nginx对mc服务器进行反向代理，隐藏源站ip并实�
 date: 2025-10-08
 tags: [MC, nginx, 服务器]
 category: 技术
+keywords: [MC, 反向代理, 服务器, 我的世界, 云服务器, Minecraft, nginx]
 author: 星辰曦羽
 cover: https://img.antares.xin/nginx-mc/6.png
 layout: layouts/post.njk

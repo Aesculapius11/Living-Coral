@@ -16,7 +16,20 @@
     "bilibili": "https://space.bilibili.com/310810015"
   },
   "themeColor": "#FC766A",
-  "coverImage": "https://randomimg.antares.xin/h"
+  "coverImage": "https://randomimg.antares.xin/h",
+  "defaultKeywords": [
+    "个人博客",
+    "技术分享", 
+    "MC",
+    "服务器",
+    "内网穿透",
+    "CDN",
+    "云服务器",
+    "我的世界",
+    "虚拟机",
+    "Minecraft",
+    "星辰曦羽"
+  ]
 }
 
 
