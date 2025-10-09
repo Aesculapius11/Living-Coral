@@ -1,6 +1,6 @@
 ---
 title: 分享一个免费续杯Cursor的小寄巧
-description: 用自己的域名邮箱来白嫖Cursor，截止至2025-08-31依然可用
+description: 用自己的域名邮箱来白嫖Cursor，截止至2025-10-08依然可用
 date: 2025-08-31
 tags: [Cursor, AI]
 category: 白嫖怪出发
