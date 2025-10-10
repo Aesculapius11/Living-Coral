@@ -60,7 +60,8 @@ keywords: [搜索, 博客搜索, 文章搜索, 技术搜索, 星辰曦羽]
       "date": "{{ item.date }}",
                    "url": "{{ item.url }}",
       "excerpt": "{{ item.excerpt | replace('"', '\\"') }}",
-      "cover": "{{ item.cover | replace('"', '\\"') }}"
+      "cover": "{{ item.cover | replace('"', '\\"') }}",
+      "content": "{{ item.content | replace('\n', ' ') | replace('\r', ' ') | replace('"', '\\"') }}"
     }{% if not loop.last %},{% endif %}
     {% endfor %}
   ];

@@ -1,5 +1,6 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { DateTime } = require("luxon");
+const fs = require("fs");
 
 module.exports = function (eleventyConfig) {
   // 构建期语法高亮（Prism）；添加语言别名
@@ -74,6 +75,30 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("searchIndex", (collectionApi) => {
     const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
     return collectionApi.getFilteredByGlob("src/blog/*.md").map((item) => {
+      // 从源 Markdown 读取并转为纯文本，避免过早访问 templateContent
+      let textContent = "";
+      try {
+        const source = fs.readFileSync(item.inputPath, "utf8");
+        // 去除 YAML front matter
+        const noFm = source.replace(/^---[\s\S]*?---\s*/, "");
+        // 粗略移除 Markdown 语法与链接/图片，仅保留可读文本
+        const noCode = noFm.replace(/```[\s\S]*?```/g, " ");
+        const noInlineCode = noCode.replace(/`[^`]*`/g, " ");
+        const noImages = noInlineCode.replace(/!\[[^\]]*\]\([^\)]*\)/g, " ");
+        const noLinks = noImages.replace(/\[[^\]]*\]\([^\)]*\)/g, (m) => m.replace(/\[[^\]]*\]\([^\)]*\)/, " "));
+        const noMd = noLinks
+          .replace(/^>\s?/gm, " ")
+          .replace(/^#+\s*/gm, " ")
+          .replace(/^[-*+]\s+/gm, " ")
+          .replace(/^\d+\.\s+/gm, " ")
+          .replace(/\*|_|~~|\|/g, " ")
+          .replace(/<[^>]+>/g, " ") // 防御性移除 HTML
+          .replace(/&[a-z#0-9]+;/gi, " ");
+        textContent = noMd.replace(/\s+/g, " ").trim();
+      } catch (e) {
+        textContent = "";
+      }
+
       return {
         title: item.data.title || "",
         description: item.data.description || "",
@@ -82,7 +107,8 @@ module.exports = function (eleventyConfig) {
         date: item.date,
         url: `${pathPrefix}blog/${item.fileSlug}/`,
         excerpt: item.data.excerpt || "",
-        cover: item.data.cover || ""
+        cover: item.data.cover || "",
+        content: textContent
       };
     });
   });

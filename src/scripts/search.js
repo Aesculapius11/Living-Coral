@@ -171,6 +171,8 @@ class BlogSearch {
   }
 
   // 创建单个搜索结果的HTML
+  // 添加分类高亮样式   ${result.category ? `<span class=\"px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral\">${this.highlightText(result.category, 'bg-livingCoral/20 text-livingCoral dark:bg-livingCoral/20')}</span>` : ''}
+  // 添加tag高亮样式   ${result.tags && result.tags.length > 0 ? result.tags.map(tag => `<span class=\"px-2 py-0.5 rounded bg-black/5 dark:bg-white/10\">#${this.highlightText(tag, 'bg-livingCoral/20 text-livingCoral dark:bg-livingCoral/20')}</span>`).join('') : ''}
   createResultHTML(result) {
     const date = result.date ? new Date(result.date).toLocaleDateString('zh-CN').replace(/\//g, '-') : '';
     
@@ -191,8 +193,8 @@ class BlogSearch {
     `;
   }
 
-  // 高亮搜索关键词
-  highlightText(text) {
+  // 高亮搜索关键词（支持传入自定义样式类名）
+  highlightText(text, extraClasses) {
     if (!text) return '';
     const query = this.searchInput.value.trim();
     if (!query) return text;
@@ -202,7 +204,10 @@ class BlogSearch {
 
     queryWords.forEach(word => {
       const regex = new RegExp(`(${word})`, 'gi');
-      highlightedText = highlightedText.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-800 px-1 rounded">$1</mark>');
+      const classes = extraClasses && extraClasses.length > 0
+        ? `${extraClasses} px-1 rounded`
+        : 'bg-yellow-200 dark:bg-yellow-800 px-1 rounded';
+      highlightedText = highlightedText.replace(regex, `<mark class="${classes}">$1</mark>`);
     });
 
     return highlightedText;
