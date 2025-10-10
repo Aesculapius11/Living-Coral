@@ -1,6 +1,7 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { DateTime } = require("luxon");
 const fs = require("fs");
+const Image = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
   // 构建期语法高亮（Prism）；添加语言别名
@@ -202,6 +203,79 @@ module.exports = function (eleventyConfig) {
 
     return urls;
   });
+
+  // LQIP 与响应式图片：Nunjucks 异步短代码
+  eleventyConfig.addNunjucksAsyncShortcode(
+    "image",
+    async function (src, alt = "", sizes = "(min-width: 768px) 768px, 100vw", loading = "lazy", fetchpriority = "", classNames = "", style = "") {
+      // 检查是否是外部图片（img.antares.xin）
+      const isExternalImage = src.includes('img.antares.xin');
+      
+      if (isExternalImage) {
+        // 对于外部图片，生成LQIP + 原始图片的渐进式加载
+        const metadata = await Image(src, {
+          widths: [24], // 只生成最小的LQIP图片
+          formats: ["jpeg"],
+          outputDir: "_site/img",
+          urlPath: "/img",
+          sharpJpegOptions: { quality: 20 }, // 极低质量用于LQIP
+        });
+
+        const lowsrc = metadata.jpeg[0];
+        const safeAlt = String(alt || "").replace(/"/g, "&quot;");
+        const priorityAttr = fetchpriority ? ` fetchpriority="${fetchpriority}"` : "";
+        const pictureClassAttr = classNames ? ` class="${classNames}"` : "";
+        const pictureStyleAttr = style ? ` style="${style}"` : "";
+        
+        // 生成唯一ID用于JavaScript处理
+        const imageId = `progressive-img-${Math.random().toString(36).substr(2, 9)}`;
+        
+        return `<picture${pictureClassAttr}${pictureStyleAttr} data-original-src="${src}">
+  <img
+    id="${imageId}"
+    src="${lowsrc.url}"
+    width="${lowsrc.width}"
+    height="${lowsrc.height}"
+    alt="${safeAlt}"
+    loading="${loading}"
+    decoding="async"${priorityAttr}
+    style="filter: blur(5px); transition: filter 0.3s ease; width: 100%; height: 100%; object-fit: cover;"
+    onload="loadOriginalImage('${imageId}', '${src}')"
+  />
+</picture>`;
+      } else {
+        // 对于本地图片，使用原有的响应式图片处理
+        const metadata = await Image(src, {
+          widths: [24, 320, 640, 1024, 1600],
+          formats: ["webp", "jpeg"],
+          outputDir: "_site/img",
+          urlPath: "/img",
+          sharpWebpOptions: { quality: 70 },
+          sharpJpegOptions: { quality: 76 },
+        });
+
+        const imageFormats = Object.values(metadata);
+        const lowsrc = metadata.jpeg ? metadata.jpeg[0] : imageFormats[0][0];
+        const highsrc = metadata.jpeg ? metadata.jpeg[metadata.jpeg.length - 1] : imageFormats[0][imageFormats[0].length - 1];
+
+        // 生成 <picture>，使用最小图作为 LQIP，加载后移除模糊
+        const sources = imageFormats
+          .map((formatEntries) => {
+            const type = formatEntries[0].sourceType;
+            const srcset = formatEntries.map((e) => e.srcset).join(", ");
+            return `  <source type="${type}" srcset="${srcset}" sizes="${sizes}">`;
+          })
+          .join("\n");
+
+        const safeAlt = String(alt || "").replace(/"/g, "&quot;");
+        const priorityAttr = fetchpriority ? ` fetchpriority="${fetchpriority}"` : "";
+        const pictureClassAttr = classNames ? ` class="${classNames}"` : "";
+        const pictureStyleAttr = style ? ` style="${style}"` : "";
+        
+        return `<picture${pictureClassAttr}${pictureStyleAttr}>\n${sources}\n  <img\n    src="${lowsrc.url}"\n    width="${highsrc.width}"\n    height="${highsrc.height}"\n    alt="${safeAlt}"\n    loading="${loading}"\n    decoding="async"${priorityAttr}\n    onload="this.style.filter='none';this.style.transform='none';"\n  />\n</picture>`;
+      }
+    }
+  );
 
   return {
     dir: {

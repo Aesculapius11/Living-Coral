@@ -37,7 +37,7 @@ keywords: [个人博客, 服务器, 内网穿透, 云服务器, 我的世界, Mi
     <a href="{{ post.url | url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
       {% if post.data.cover %}
       <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
-        <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" class="w-full h-full object-cover" loading="lazy" />
+        {% image post.data.cover, post.data.title, "(min-width: 768px) 320px, 100vw", "lazy", "", "w-full h-full object-cover" %}
       </div>
       {% endif %}
       <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ post.date | readableDate }}</p>

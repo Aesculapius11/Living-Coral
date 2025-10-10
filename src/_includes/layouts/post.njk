@@ -45,7 +45,7 @@ layout: layouts/base.njk
     <header class="mb-8">
       {% if cover %}
       <div class="h-56 md:h-72 w-full rounded-2xl overflow-hidden shadow-soft mb-6">
-        <img src="{{ cover }}" alt="{{ title }}" class="w-full h-full object-cover" fetchpriority="high" loading="eager" decoding="async"/>
+        {% image cover, title, "(min-width: 768px) 768px, 100vw", "eager", "high", "w-full h-full object-cover" %}
       </div>
       {% endif %}
       <h1 class="text-3xl md:text-4xl font-bold mb-3" data-aos="fade-up">{{ title }}</h1>
