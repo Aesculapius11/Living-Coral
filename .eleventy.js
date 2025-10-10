@@ -234,12 +234,12 @@ module.exports = function (eleventyConfig) {
   <img
     id="${imageId}"
     src="${lowsrc.url}"
-    width="${lowsrc.width}"
-    height="${lowsrc.height}"
+    width="100%"
+    height="100%"
     alt="${safeAlt}"
     loading="${loading}"
     decoding="async"${priorityAttr}
-    style="filter: blur(5px); transition: filter 0.3s ease; width: 100%; height: 100%; object-fit: cover;"
+    style="max-width:100%;height:100%;object-fit:cover;display:block;"
     onload="loadOriginalImage('${imageId}', '${src}')"
   />
 </picture>`;
