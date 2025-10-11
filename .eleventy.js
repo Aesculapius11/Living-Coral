@@ -207,18 +207,40 @@ module.exports = function (eleventyConfig) {
   // LQIP 与响应式图片：Nunjucks 异步短代码
   eleventyConfig.addNunjucksAsyncShortcode(
     "image",
-    async function (src, alt = "", sizes = "(min-width: 768px) 768px, 100vw", loading = "eager", fetchpriority = "", classNames = "", style = "") {
+    async function (
+      src,
+      alt = "",
+      sizes = "(min-width: 768px) 768px, 100vw",
+      loading = "eager",
+      fetchpriority = "",
+      classNames = "",
+      style = ""
+    ) {
       // 检查是否是外部图片（img.antares.xin）
-      const isExternalImage = src.includes('img.antares.xin');
-      
+      const isExternalImage = src.includes("img.antares.xin");
+
       if (isExternalImage) {
-        // 对于外部图片，生成LQIP + 原始图片的渐进式加载
+        // 提取路径和文件名
+        const url = new URL(src);
+        const pathname = url.pathname; // e.g., /atm10air/1.webp
+        const dir = pathname.substring(0, pathname.lastIndexOf("/")); // e.g., /atm10air
+        const filename = pathname.substring(pathname.lastIndexOf("/") + 1); // e.g., 1.webp
+        const name = filename.substring(0, filename.lastIndexOf(".")); // e.g., 1
+
+        // 生成规范化的输出路径
+        const outputDir = `_site/img${dir}`; // e.g., _site/img/atm10air
+        const urlPath = `/img${dir}`; // e.g., /img/atm10air
+
+        // 生成LQIP + 原始图片的渐进式加载
         const metadata = await Image(src, {
           widths: [24], // 只生成最小的LQIP图片
           formats: ["jpeg"],
-          outputDir: "_site/img",
-          urlPath: "/img",
+          outputDir: outputDir,
+          urlPath: urlPath,
           sharpJpegOptions: { quality: 20 }, // 极低质量用于LQIP
+          filenameFormat: function (id, src, width, format, options) {
+            return `${name}-${width}.${format}`; // e.g., 1-24.jpeg
+          },
         });
 
         const lowsrc = metadata.jpeg[0];
@@ -226,10 +248,10 @@ module.exports = function (eleventyConfig) {
         const priorityAttr = fetchpriority ? ` fetchpriority="${fetchpriority}"` : "";
         const pictureClassAttr = classNames ? ` class="${classNames}"` : "";
         const pictureStyleAttr = style ? ` style="${style}"` : "";
-        
+
         // 生成唯一ID用于JavaScript处理
         const imageId = `progressive-img-${Math.random().toString(36).substr(2, 9)}`;
-        
+
         return `<picture${pictureClassAttr}${pictureStyleAttr} data-original-src="${src}">
   <img
     id="${imageId}"
@@ -271,7 +293,7 @@ module.exports = function (eleventyConfig) {
         const priorityAttr = fetchpriority ? ` fetchpriority="${fetchpriority}"` : "";
         const pictureClassAttr = classNames ? ` class="${classNames}"` : "";
         const pictureStyleAttr = style ? ` style="${style}"` : "";
-        
+
         return `<picture${pictureClassAttr}${pictureStyleAttr}>\n${sources}\n  <img\n    src="${lowsrc.url}"\n    width="${highsrc.width}"\n    height="${highsrc.height}"\n    alt="${safeAlt}"\n    loading="${loading}"\n    decoding="async"${priorityAttr}\n    onload="this.style.filter='none';this.style.transform='none';"\n  />\n</picture>`;
       }
     }
