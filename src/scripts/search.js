@@ -171,14 +171,41 @@ class BlogSearch {
   }
 
   // 创建单个搜索结果的HTML
-  // 添加分类高亮样式   ${result.category ? `<span class=\"px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral\">${this.highlightText(result.category, 'bg-livingCoral/20 text-livingCoral dark:bg-livingCoral/20')}</span>` : ''}
-  // 添加tag高亮样式   ${result.tags && result.tags.length > 0 ? result.tags.map(tag => `<span class=\"px-2 py-0.5 rounded bg-black/5 dark:bg-white/10\">#${this.highlightText(tag, 'bg-livingCoral/20 text-livingCoral dark:bg-livingCoral/20')}</span>`).join('') : ''}
+  // 修改创建单个搜索结果的HTML方法，使用相对路径生成小图路径
   createResultHTML(result) {
     const date = result.date ? new Date(result.date).toLocaleDateString('zh-CN').replace(/\//g, '-') : '';
-    
+
+    // 根据封面图片路径生成小图路径
+    const cover = result.cover || '';
+    const isExternalImage = cover.includes('img.antares.xin');
+    let lowResCover = '';
+    if (isExternalImage) {
+      const url = new URL(cover);
+      const pathname = url.pathname; // e.g., /atm10air/1.webp
+      const dir = pathname.substring(0, pathname.lastIndexOf('/')); // e.g., /atm10air
+      const filename = pathname.substring(pathname.lastIndexOf('/') + 1); // e.g., 1.webp
+      const name = filename.substring(0, filename.lastIndexOf('.')); // e.g., 1
+      lowResCover = `../img${dir}/${name}-24.jpeg`; // 使用相对路径
+    }
+
+    // 生成唯一ID用于JavaScript处理
+    const imageId = `progressive-img-${Math.random().toString(36).substr(2, 9)}`;
+
     return `
       <a href="${result.url}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="${Math.floor(Math.random() * 6) * 60}">
-        ${result.cover ? `<div class="h-40 w-full rounded-xl overflow-hidden mb-3"><img src="${result.cover}" alt="${result.title}" class="w-full h-full object-cover" loading="lazy" /></div>` : ''}
+        ${cover ? `<div class="h-40 w-full rounded-xl overflow-hidden mb-3">
+          <picture data-original-src="${cover}">
+            <img
+              id="${imageId}"
+              src="${lowResCover}"
+              alt="${result.title}"
+              loading="lazy"
+              decoding="async"
+              style="width:100%;height:100%;display:block;object-fit:cover;filter:blur(10px);transition:filter 0.3s ease;"
+              onload="loadOriginalImage('${imageId}', '${cover}')"
+            />
+          </picture>
+        </div>` : ''}
         <p class="text-sm text-neutral-500 dark:text-neutral-400">${date}</p>
         <p class="mt-1 font-semibold text-neutral-900 dark:text-white">${this.highlightText(result.title)}</p>
         <div class="mt-2 flex flex-wrap gap-2 text-sm">
@@ -242,3 +269,18 @@ class BlogSearch {
 document.addEventListener('DOMContentLoaded', () => {
   new BlogSearch();
 });
+
+// 加载原始图片，添加过渡效果
+function loadOriginalImage(imageId, originalSrc) {
+  const img = document.getElementById(imageId);
+  if (!img || processedImages.has(imageId)) return;
+  processedImages.add(imageId);
+
+  img.src = originalSrc;
+  img.style.filter = 'none';
+  img.style.transition = 'filter 0.3s ease';
+  img.removeAttribute('width');
+  img.removeAttribute('height');
+  img.style.cssText = 'width:100%;height:100%;display:block;object-fit:cover;';
+  img.loading = "lazy";
+}
