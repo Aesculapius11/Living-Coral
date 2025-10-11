@@ -21,24 +21,24 @@ layout: layouts/post.njk
 
 （注册应该不需要我讲了吧，支付宝扫码登录就行）
 
-![](https://img.antares.xin/ts/1.webp)
+{% image "https://img.antares.xin/ts/1.webp", "" %}
 
 阿里云首页
 
-![](https://img.antares.xin/ts/2.webp)
+{% image "https://img.antares.xin/ts/2.webp", "" %}
 
 领券界面
 
 这里需要扫码验证
 
-![](https://img.antares.xin/ts/3.avif)
+{% image "https://img.antares.xin/ts/3.avif", "" %}
 
 验证通过界面
 
   
     其实如果不是学生的话也是可以进行试用的，在权益中心下方还有一个个人试用，同样在认证完成之后就可以试用了，这里因为我之前试用过了，所以就不展示了。
 
-![](https://img.antares.xin/ts/4.avif)
+{% image "https://img.antares.xin/ts/4.avif", "" %}
 
 个人试用界面
 
@@ -47,14 +47,14 @@ layout: layouts/post.njk
 
      这边我们选择的是云服务器ECS
 
-![](https://img.antares.xin/ts/5.avif)
+{% image "https://img.antares.xin/ts/5.avif", "" %}
 
 主页-产品-云服务器ECS
 
   
         进入云服务器ECS的详情界面后点击购买
 
-![](https://img.antares.xin/ts/6.avif)
+{% image "https://img.antares.xin/ts/6.avif", "" %}
 
 云服务器ECS详情
 
@@ -67,14 +67,14 @@ layout: layouts/post.njk
 
     第三个是实例规格，因为TS的服务器真的用不了多少性能，所以我直接怎么便宜怎么来
 
-![](https://img.antares.xin/ts/7.avif)
+{% image "https://img.antares.xin/ts/7.avif", "" %}
 
 购买详情一
 
   
     镜像选什么其实都问题不大，Linux相对Window又更稳定一点，随便选一个Linux系统就可以，至于系统盘，TS用不了多少读写性能的，选择最便宜的就可以了。
 
-![](https://img.antares.xin/ts/8.avif)
+{% image "https://img.antares.xin/ts/8.avif", "" %}
 
 购买详情二
 
@@ -86,7 +86,7 @@ layout: layouts/post.njk
 
     这个密码建议改成自定义密码然后自己设置密码即可
 
-![](https://img.antares.xin/ts/9.avif)
+{% image "https://img.antares.xin/ts/9.avif", "" %}
 
 购买详情三
 
@@ -97,63 +97,63 @@ layout: layouts/post.njk
 
     进入控制台
 
-![](https://img.antares.xin/ts/10.avif)
+{% image "https://img.antares.xin/ts/10.avif", "" %}
 
 主页
 
   
     选择服务器所在地址，红色框所在的就是我们刚购买（白嫖）的服务器
 
-![](https://img.antares.xin/ts/11.avif)
+{% image "https://img.antares.xin/ts/11.avif", "" %}
 
 服务器实例
 
   
     点击此处的远程连接
 
-![](https://img.antares.xin/ts/12.avif)
+{% image "https://img.antares.xin/ts/12.avif", "" %}
 
 远程连接
 
   
     我们使用Workbench进行远程连接
 
-![](https://img.antares.xin/ts/13.avif)
+{% image "https://img.antares.xin/ts/13.avif", "" %}
 
 远程连接
 
   
     点击后会进入如下界面，输入你一开始在购买界面设置的密码即可进入
 
-![](https://img.antares.xin/ts/14.avif)
+{% image "https://img.antares.xin/ts/14.avif", "" %}
 
 Workbench输入密码
 
   
     ~~什么你密码忘了，怎么重置？~~
 
-![](https://img.antares.xin/ts/15.avif)
+{% image "https://img.antares.xin/ts/15.avif", "" %}
 
 重置密码
 
   
     点击登录后会进入这个界面
 
-![](https://img.antares.xin/ts/16.avif)
+{% image "https://img.antares.xin/ts/16.avif", "" %}
 
 主界面
 
   
     点击文件，打开文件树
 
-![](https://img.antares.xin/ts/17.avif)
+{% image "https://img.antares.xin/ts/17.avif", "" %}
 
 文件树
 
   
     点击后会展示服务器的文件
 
-![](https://img.antares.xin/ts/18.avif)
+{% image "https://img.antares.xin/ts/18.avif", "" %}
 
 文件树
 
@@ -168,28 +168,28 @@ Workbench输入密码
 
     千万别下载错了，别一不小心到了什么teamspeak中文网去了
 
-![](https://img.antares.xin/ts/20.avif)
+{% image "https://img.antares.xin/ts/20.avif", "" %}
 
 下载界面
 
   
     回到Workbench右键文件树上传文件
 
-![](https://img.antares.xin/ts/21.avif)
+{% image "https://img.antares.xin/ts/21.avif", "" %}
 
 终于写到上传了吗感觉已经写了一万年了
 
   
     上传刚才下载的文件就行
 
-![](https://img.antares.xin/ts/22.avif)
+{% image "https://img.antares.xin/ts/22.avif", "" %}
 
 上传刚才下载的文件
 
   
     等待上传完成即可
 
-![](https://img.antares.xin/ts/23.avif)
+{% image "https://img.antares.xin/ts/23.avif", "" %}
 
 上传完成界面如下
 
@@ -204,7 +204,7 @@ Workbench输入密码
 
     完成后回车即可
 
-![](https://img.antares.xin/ts/24.avif)
+{% image "https://img.antares.xin/ts/24.avif", "" %}
 
 解压
 
@@ -223,14 +223,14 @@ Workbench输入密码
 
    更改路径后再执行即可 如果你的压缩包上传位置不是在根目录下方的话也可以通过cd /+路径找到文件
 
-![](https://img.antares.xin/ts/25.avif)
+{% image "https://img.antares.xin/ts/25.avif", "" %}
 
 解压二
 
   
     解压成功后就会冒出这个文件夹
 
-![](https://img.antares.xin/ts/26.avif)
+{% image "https://img.antares.xin/ts/26.avif", "" %}
 
 解压成功
 
@@ -239,7 +239,7 @@ Workbench输入密码
 
     重命名为teamspeak3
 
-![](https://img.antares.xin/ts/27.avif)
+{% image "https://img.antares.xin/ts/27.avif", "" %}
 
 重命名
 
@@ -248,7 +248,7 @@ Workbench输入密码
 
 `cd /teamspeak3`
 
-![](https://img.antares.xin/ts/28.avif)
+{% image "https://img.antares.xin/ts/28.avif", "" %}
 
 改路径
 
@@ -257,7 +257,7 @@ Workbench输入密码
 
 `touch .ts3server_license_accepted`
 
-![](https://img.antares.xin/ts/29.avif)
+{% image "https://img.antares.xin/ts/29.avif", "" %}
 
 安装许可
 
@@ -266,7 +266,7 @@ Workbench输入密码
 
 `./ts3server_startscript.sh start`
 
-![](https://img.antares.xin/ts/30.avif)
+{% image "https://img.antares.xin/ts/30.avif", "" %}
 
 启用服务
 
@@ -275,7 +275,7 @@ Workbench输入密码
 
     运行后会出现如下界面
 
-![](https://img.antares.xin/ts/31.avif)
+{% image "https://img.antares.xin/ts/31.avif", "" %}
 
 运行结果
 
@@ -314,7 +314,7 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-![](https://img.antares.xin/ts/32.webp)
+{% image "https://img.antares.xin/ts/32.webp", "" %}
 
     如果你的路径和我的不一样就需要修改其中红框内的四行路径
 
@@ -322,7 +322,7 @@ WantedBy=multi-user.target
 
 `systemctl enable teamspeak.service`
 
-![](https://img.antares.xin/ts/33.avif)
+{% image "https://img.antares.xin/ts/33.avif", "" %}
 
 新建脚本
 
@@ -333,7 +333,7 @@ WantedBy=multi-user.target
 
     出现Job……巴拉巴拉的不用管再输入一次就行
 
-![](https://img.antares.xin/ts/34.avif)
+{% image "https://img.antares.xin/ts/34.avif", "" %}
 
 启动脚本
 
@@ -346,7 +346,7 @@ WantedBy=multi-user.target
 
     出现以下提示就是启用成功了
 
-![](https://img.antares.xin/ts/35.avif)
+{% image "https://img.antares.xin/ts/35.avif", "" %}
 
 检验服务是否启用
 
@@ -355,7 +355,7 @@ WantedBy=multi-user.target
 
     回到阿里云的管理界面进入安全组 管理规则
 
-![](https://img.antares.xin/ts/36.avif)
+{% image "https://img.antares.xin/ts/36.avif", "" %}
 
 安全组
 
@@ -367,11 +367,11 @@ WantedBy=multi-user.target
 10011 TCP  
 41144 TCP
 
-![](https://img.antares.xin/ts/37.avif)
+{% image "https://img.antares.xin/ts/37.avif", "" %}
 
 添加规则
 
-![](https://img.antares.xin/ts/38.avif)
+{% image "https://img.antares.xin/ts/38.avif", "" %}
 
   
 添加规则
@@ -382,7 +382,7 @@ WantedBy=multi-user.target
 
     在阿里云服务器管理界面实例配置中找到地址
 
-![](https://img.antares.xin/ts/39.avif)
+{% image "https://img.antares.xin/ts/39.avif", "" %}
 
   
 IP地址在这儿
@@ -391,7 +391,7 @@ IP地址在这儿
 
     将刚刚复制的地址填入此处即可
 
-![](https://img.antares.xin/ts/40.avif)
+{% image "https://img.antares.xin/ts/40.avif", "" %}
 
 连接服务器
 
@@ -400,16 +400,16 @@ IP地址在这儿
 
     将刚才保存下来的token里的内容填进去
 
-![](https://img.antares.xin/ts/41.avif)
+{% image "https://img.antares.xin/ts/41.avif", "" %}
 
 运行结果
 
-![](https://img.antares.xin/ts/45.avif)
+{% image "https://img.antares.xin/ts/45.avif", "" %}
 
   
 输入权限码
 
-![](https://img.antares.xin/ts/42.avif)
+{% image "https://img.antares.xin/ts/42.avif", "" %}
 
 输入权限码  
         
@@ -424,7 +424,7 @@ IP地址在这儿
 
 `systemctl start firewalld`
 
-![](https://img.antares.xin/ts/43.avif)
+{% image "https://img.antares.xin/ts/43.avif", "" %}
 
 输入这一行是因为我发现防火墙没开启 手动开启防火墙
 
@@ -438,6 +438,6 @@ IP地址在这儿
 
 `firewall-cmd --reload`
 
-![](https://img.antares.xin/ts/44.avif)
+{% image "https://img.antares.xin/ts/44.avif", "" %}
 
 设置防火墙
