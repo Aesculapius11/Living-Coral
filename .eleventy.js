@@ -219,6 +219,9 @@ module.exports = function (eleventyConfig) {
       // 检查是否是外部图片（img.antares.xin）
       const isExternalImage = src.includes("img.antares.xin");
 
+      // 获取环境变量中的路径前缀
+      const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
+
       if (isExternalImage) {
         // 提取路径和文件名
         const url = new URL(src);
@@ -229,7 +232,7 @@ module.exports = function (eleventyConfig) {
 
         // 生成规范化的输出路径
         const outputDir = `_site/img${dir}`; // e.g., _site/img/atm10air
-        const urlPath = `/img${dir}`; // e.g., /img/atm10air
+        const urlPath = `${pathPrefix}img${dir}`; // e.g., /livingcoral/img/atm10air
 
         // 生成LQIP + 原始图片的渐进式加载
         const metadata = await Image(src, {
@@ -271,7 +274,7 @@ module.exports = function (eleventyConfig) {
           widths: [24, 320, 640, 1024, 1600],
           formats: ["webp", "jpeg"],
           outputDir: "_site/img",
-          urlPath: "/img",
+          urlPath: `${pathPrefix}img`,
           sharpWebpOptions: { quality: 70 },
           sharpJpegOptions: { quality: 76 },
         });
