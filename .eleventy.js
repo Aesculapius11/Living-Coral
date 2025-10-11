@@ -207,7 +207,7 @@ module.exports = function (eleventyConfig) {
   // LQIP 与响应式图片：Nunjucks 异步短代码
   eleventyConfig.addNunjucksAsyncShortcode(
     "image",
-    async function (src, alt = "", sizes = "(min-width: 768px) 768px, 100vw", loading = "lazy", fetchpriority = "", classNames = "", style = "") {
+    async function (src, alt = "", sizes = "(min-width: 768px) 768px, 100vw", loading = "eager", fetchpriority = "", classNames = "", style = "") {
       // 检查是否是外部图片（img.antares.xin）
       const isExternalImage = src.includes('img.antares.xin');
       
@@ -239,7 +239,7 @@ module.exports = function (eleventyConfig) {
     alt="${safeAlt}"
     loading="${loading}"
     decoding="async"${priorityAttr}
-    style="max-width:100%;height:100%;object-fit:cover;display:block;"
+    style="width:100%;height:100%;display:block;object-fit:cover;"
     onload="loadOriginalImage('${imageId}', '${src}')"
   />
 </picture>`;
