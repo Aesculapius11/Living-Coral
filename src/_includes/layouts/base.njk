@@ -38,9 +38,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-    <!-- Prism 浅/深色主题（供 @11ty/eleventy-plugin-syntaxhighlight 使用） -->
-    <link id="prism-theme-light" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" disabled>
-    <link id="prism-theme-dark" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" disabled>
+    {% if page.url and page.url.match('/blog/') %}
+      <!-- Prism 浅/深色主题（供 @11ty/eleventy-plugin-syntaxhighlight 使用） -->
+      <link id="prism-theme-light" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" disabled>
+      <link id="prism-theme-dark" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css" disabled>
+    {% endif %}
     <script src="{{ '/assets/img.js' | url }}"></script>
     <script>
       (function(){
