@@ -1,0 +1,7 @@
+  {
+    "name": "living-coral-cfworker",
+    "compatibility_date": "2025-10-17",
+    "assets": {
+     "directory": "./_site"
+  }
+}
