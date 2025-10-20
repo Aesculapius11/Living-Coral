@@ -5,7 +5,7 @@ date: 2025-07-30
 tags: [EdgeOne, CDN]
 category: 白嫖怪出发
 author: 星辰曦羽
-cover: https://img.antares.xin/EdgeOne-1/1.webp
+cover: https://img.antares.xin/assets/EdgeOne-1/1.webp
 layout: layouts/post.njk
 ---
 ## 引言
@@ -13,7 +13,7 @@ layout: layouts/post.njk
 
 EdgeOne免费套餐领取链接：[测速分享，解锁更多 EdgeOne 免费套餐](https://edgeone.ai/zh/get-free-plan)
 
-{% image "https://img.antares.xin/EdgeOne-1/2.webp", "image" %}
+{% image "https://img.antares.xin/assets/EdgeOne-1/2.webp", "image" %}
 
 他需要在测速后分享到X和Facebook，但是实际上你只要点一下那个按钮就可以了，不需要真的分享。
 
@@ -25,15 +25,15 @@ EdgeOne免费套餐领取链接：[测速分享，解锁更多 EdgeOne 免费套
 2. 缓存结尾所有为/的界面（排除wp-admin后的界面）
 
 
-{% image "https://img.antares.xin/EdgeOne-1/3.webp", "image" %}
+{% image "https://img.antares.xin/assets/EdgeOne-1/3.webp", "image" %}
 
 
 今天看网站后台发现有很多流量从源站直接进行访问了，因为我并不想让他们从Cloudflare的源站去访问，于是我就在Cloudflare上设置源站必须通过EdgeOne才能访问。在Cloudflare里写一个自定义安全规则，检查所有访问源站的流量是不是通过CDN去访问的，如果不是就把他们全部阻止。
 
-{% image "https://img.antares.xin/EdgeOne-1/4.webp", "image" %}
+{% image "https://img.antares.xin/assets/EdgeOne-1/4.webp", "image" %}
 
 
-{% image "https://img.antares.xin/EdgeOne-1/5.webp", "image" %}
+{% image "https://img.antares.xin/assets/EdgeOne-1/5.webp", "image" %}
 
 
 现在先就这样吧，如果出现其他问题了再搞再来补充吧

@@ -5,7 +5,7 @@ date: 2025-08-20
 tags: [Xlog, 区块链]
 category: 博客
 author: 星辰曦羽
-cover: https://img.antares.xin/xlog/1.webp
+cover: https://img.antares.xin/assets/xlog/1.webp
 layout: layouts/post.njk
 ---
 ## 前言
@@ -18,32 +18,32 @@ layout: layouts/post.njk
 ## 搭建
 
 1. 首先先要准备一个钱包，点击[Xlog 官网](https://xlog.app/)右上角的连接，选择第一个钱包，此处它提示我们该浏览器没有安装Metamask，接下去准备安装Metamask。
-	{% image "https://img.antares.xin/xlog/2.webp", "选择钱包" %}
-	{% image "https://img.antares.xin/xlog/3.webp", "选择钱包" %}
+	{% image "https://img.antares.xin/assets/xlog/2.webp", "选择钱包" %}
+	{% image "https://img.antares.xin/assets/xlog/3.webp", "选择钱包" %}
 2. 将Metamask安装到你的浏览器上
-	{% image "https://img.antares.xin/xlog/4.webp", "安装Metamask" %}
-	{% image "https://img.antares.xin/xlog/6.webp", "安装Metamask" %}
+	{% image "https://img.antares.xin/assets/xlog/4.webp", "安装Metamask" %}
+	{% image "https://img.antares.xin/assets/xlog/6.webp", "安装Metamask" %}
 3. 安装完毕后，我们创建一个自己的钱包
 	1. 此处我们选择使用助记词来创建，请妥善保管好你的助记词，这是你找回账户的唯一办法
-	{% image "https://img.antares.xin/xlog/9.webp", "创建钱包" %}
+	{% image "https://img.antares.xin/assets/xlog/9.webp", "创建钱包" %}
 	2. 设置密码，请不要忘记你的密码，每次打开Metamask都需要输入密码
-	{% image "https://img.antares.xin/xlog/10.webp", "设定密码" %}
+	{% image "https://img.antares.xin/assets/xlog/10.webp", "设定密码" %}
 	3. 接下去就是最重要的助记词部分，请妥善保管好你的助记词，如果助记词丢失了，这个账户就永远无法登上了
-	{% image "https://img.antares.xin/xlog/11.webp", "助记词" %}
+	{% image "https://img.antares.xin/assets/xlog/11.webp", "助记词" %}
 4. 连接钱包，此时可以回到Xlog的官网，刷新网站并连接你的钱包
-	{% image "https://img.antares.xin/xlog/13.webp", "连接钱包" %}
+	{% image "https://img.antares.xin/assets/xlog/13.webp", "连接钱包" %}
 5. 创建角色并进入仪表盘
 	1. 按照需求填入信息即可
-	{% image "https://img.antares.xin/xlog/14.webp", "创建角色" %}
+	{% image "https://img.antares.xin/assets/xlog/14.webp", "创建角色" %}
 	2. 此时他会提示你的账户的虚拟货币不足，需要发帖来获取，不过我懒得去发，这边提供另外一个方式
-	{% image "https://img.antares.xin/xlog/15.webp", "创建角色" %}
+	{% image "https://img.antares.xin/assets/xlog/15.webp", "创建角色" %}
 	3. 进入[水龙头](https://faucet.crossbell.io/)填入你的账号（账号在Metamask里复制），它会送你0.02虚拟币（一个账户的余额小于0.02时，就可以来这里获取，0.02也够用上好久了）
-	{% image "https://img.antares.xin/xlog/16.webp", "获取虚拟币" %}
+	{% image "https://img.antares.xin/assets/xlog/16.webp", "获取虚拟币" %}
 	4. 最后确认交易即可完成角色创建
-	{% image "https://img.antares.xin/xlog/17.webp", "创建角色" %}
+	{% image "https://img.antares.xin/assets/xlog/17.webp", "创建角色" %}
 	5. 注意点：有些时候它虽然提示创建的用户ID（Handle）是可以使用的，但是交易始终无法完成，要不是燃料费不够，要不就是一直卡着，或者直接就报错，这种问题只能通过换一个用户ID来解决，我也不知道为什么，我一开始以为是燃料费不够的问题，特意等了一天又换到0.02虚拟币，但是还是不行，最后只能换ID。
 ## 使用
 把上面这一堆东西搞完之后就可以去写文章了，总体来说还是蛮好用的，界面蛮好看的，图片拖上去就能自动上传，头像域名什么的都可以自己换。还是一个蛮不错的平台，值得一玩。
-{% image "https://img.antares.xin/xlog/18.webp", "写文章" %}
-{% image "https://img.antares.xin/xlog/19.webp", "写文章" %}
-{% image "https://img.antares.xin/xlog/20.webp", "写文章" %}
+{% image "https://img.antares.xin/assets/xlog/18.webp", "写文章" %}
+{% image "https://img.antares.xin/assets/xlog/19.webp", "写文章" %}
+{% image "https://img.antares.xin/assets/xlog/20.webp", "写文章" %}

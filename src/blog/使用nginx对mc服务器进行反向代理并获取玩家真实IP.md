@@ -6,7 +6,7 @@ tags: [MC, nginx, 服务器]
 category: 技术
 keywords: [MC, 反向代理, 服务器, 我的世界, 云服务器, Minecraft, nginx]
 author: 星辰曦羽
-cover: https://img.antares.xin/nginx-mc/6.png
+cover: https://img.antares.xin/assets/nginx-mc/6.png
 layout: layouts/post.njk
 ---
 
@@ -72,7 +72,7 @@ stream {
     }
 }
 ```
-{% image "https://img.antares.xin/nginx-mc/1.png", "nginx配置文件" %}
+{% image "https://img.antares.xin/assets/nginx-mc/1.png", "nginx配置文件" %}
 
 输入`nginx -t`测试配置文件看到OK就是没问题的了，然后重启nginx
 ```shell
@@ -100,9 +100,9 @@ stream {
     }
 }
 ```
-{% image "https://img.antares.xin/nginx-mc/2.png", "nginx配置文件" %}
+{% image "https://img.antares.xin/assets/nginx-mc/2.png", "nginx配置文件" %}
 可以看到我两次进出服务器，每次进去的服务器都不是同一个，被nginx扔到了两个不同的服务器上，也是做到了负载均衡。  
-{% image "https://img.antares.xin/nginx-mc/3.png", "服务端" %}
+{% image "https://img.antares.xin/assets/nginx-mc/3.png", "服务端" %}
 
 ### nginx负载均衡规则
 
@@ -206,7 +206,7 @@ nginx负载均衡的规则还是比较复杂的，我贴一个AI的回答以供�
   proxy-protocol: true
 ```
 
-{% image "https://img.antares.xin/nginx-mc/4.png", "paper配置文件" %}
+{% image "https://img.antares.xin/assets/nginx-mc/4.png", "paper配置文件" %}
 
 这个的目的主要是让paper知道自己是后端服务器，让它接受从反向代理传过来的玩家ip，如果不开启这一项就会导致在paper上，所有的玩家ip都是反向代理服务器的那个ip。这个功能打开后，直接连paper是连不上了，只能从反向代理服务器上走。  
 同时nginx的配置文件也需要修改
@@ -226,15 +226,15 @@ stream {
     }
 }
 ```
-{% image "https://img.antares.xin/nginx-mc/5.png", "nginx配置文件" %}
+{% image "https://img.antares.xin/assets/nginx-mc/5.png", "nginx配置文件" %}
 
 在修改后重启nginx，再次登录服务器可以看到成功获取到了玩家的真实ip。
 
-{% image "https://img.antares.xin/nginx-mc/6.png", "服务端" %}
+{% image "https://img.antares.xin/assets/nginx-mc/6.png", "服务端" %}
 
 ## 安全方面
 有了反向代理之后，我们可以让mc服务器的端口只允许反向代理服务器访问，其他ip一律禁掉。  
 windows可以在高级防火墙设置里面设置规则，放行mc的端口，同时只允许特定ip访问。  
-{% image "https://img.antares.xin/nginx-mc/7.png", "windows防火墙" %}
+{% image "https://img.antares.xin/assets/nginx-mc/7.png", "windows防火墙" %}
 如果mc运行在云服务器上，还可以在云服务器的安全组里设置仅允许某些ip访问。 
 

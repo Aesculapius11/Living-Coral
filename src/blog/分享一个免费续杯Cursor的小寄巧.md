@@ -5,16 +5,16 @@ date: 2025-08-31
 tags: [Cursor, AI]
 category: 白嫖怪出发
 author: 星辰曦羽
-cover: https://img.antares.xin/cursor/2.png
+cover: https://img.antares.xin/assets/cursor/2.png
 layout: layouts/post.njk
 ---
 ## 前言
 我最近Cursor用的比较多，也是碰到了限额，然后找到了个项目免费续杯Cursor  
 [项目地址](https://github.com/yeongpin/cursor-free-vip)  
-{% image "https://img.antares.xin/cursor/1.webp", "项目" %}  
+{% image "https://img.antares.xin/assets/cursor/1.webp", "项目" %}  
 ## 注意点
 先要退出Cursor里登录的账号（不确定是否必要）  
-{% image "https://img.antares.xin/cursor/2.png", "项目" %}  
+{% image "https://img.antares.xin/assets/cursor/2.png", "项目" %}  
 在启动后，先选择重置机器ID，再选择使用自定义邮箱注册Cursor。  
 我这边使用的是自己的域名邮箱，可以算无限使用，现在域名的价格也不是很贵，域名托管到Cloudflare上让Cloudflare做邮件转发即可。  
 我去试了下dpdns.org这个免费域名，比较可惜的是用不了。  
