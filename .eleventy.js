@@ -122,6 +122,7 @@ module.exports = function (eleventyConfig) {
       } catch (e) {
         textContent = "";
       }
+      const fullUrl = `${pathPrefix}${item.url}`; // 拼接 base URL 和相对路径
 
       return {
         title: item.data.title || "",
@@ -129,7 +130,7 @@ module.exports = function (eleventyConfig) {
         tags: item.data.tags || [],
         category: item.data.category || "",
         date: item.date,
-        url: item.url,
+        url: fullUrl,
         excerpt: item.data.excerpt || "",
         cover: item.data.cover || "",
         content: textContent
