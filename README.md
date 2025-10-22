@@ -37,8 +37,10 @@ npm install
 2) 本地开发（含 Tailwind 实时编译）
 
 ```bash
+$env:ELEVENTY_BASE_URL="/";  #这部分逻辑被我搞得很奇怪，如果是类似Github Pages要添加基础路径的就改成$env:ELEVENTY_BASE_URL="/你的基础路径/";
 npm run dev
 ```
+本来想要把搜索功能的baseurl做成和站点地图类似的逻辑，但是发现在开发环境下会怪怪的，http://localhost:8080/blog/文章1 也会变成 https://www.antares.xin/blog/文章1 目前是通过一些奇怪的办法重新调了下。
 
 默认预览地址：`http://localhost:8080`
 

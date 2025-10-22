@@ -14,13 +14,53 @@ module.exports = function (eleventyConfig) {
       } catch (e) {}
     },
   });
-  // 添加全局数据，将环境变量传递给模板
-  eleventyConfig.addGlobalData("env", {
-    SITE_BASE_URL: process.env.SITE_BASE_URL
-  });
+  // --- Step 1: 获取 SITE_BASE_URL 的完整逻辑 ---
+  let siteData = {};
+  try {
+    // 假设 site.json 位于 src/_data/site.json
+    siteData = JSON.parse(fs.readFileSync('./src/_data/site.json', 'utf8'));
+  } catch (e) {
+    console.warn("Could not read src/_data/site.json: ", e.message);
+  }
 
-  // 添加路径前缀到全局数据
-  eleventyConfig.addGlobalData("pathPrefix", process.env.ELEVENTY_BASE_URL || "/");
+  // 1. 获取主域名部分 (SITE_BASE_URL 或 site.json.baseUrl 或默认值)
+  let primaryBaseUrl = process.env.SITE_BASE_URL
+                       || siteData.baseUrl
+                       || "https://www.antares.xin";
+
+  // 确保 primaryBaseUrl 没有trailing slash
+  primaryBaseUrl = primaryBaseUrl.endsWith('/') ? primaryBaseUrl.slice(0, -1) : primaryBaseUrl;
+
+  // 2. 获取路径前缀部分 (ELEVENTY_BASE_URL)
+  let repoPathPrefix = process.env.ELEVENTY_BASE_URL || "/"; // 默认为根路径
+  // 确保 repoPathPrefix 以 / 开头，但不以 / 结尾 (除非它就是 "/")
+  if (!repoPathPrefix.startsWith('/')) {
+    repoPathPrefix = '/' + repoPathPrefix;
+  }
+  if (repoPathPrefix.length > 1 && repoPathPrefix.endsWith('/')) {
+    repoPathPrefix = repoPathPrefix.slice(0, -1);
+  }
+  // 如果 repoPathPrefix 就是 "/"，则保持它
+  if (repoPathPrefix === "") { // 防止空字符串导致拼接问题
+    repoPathPrefix = "/";
+  }
+
+  // 3. 组合得到最终的完整 base URL
+  // 例如：https://aesculapius11.github.io + /your-repo-name
+  let fullSiteUrl = `${primaryBaseUrl}${repoPathPrefix}`;
+
+  // 确保 fullSiteUrl 不以 / 结尾，因为 item.url 往往以 / 开头
+  if (fullSiteUrl.endsWith('/')) {
+    fullSiteUrl = fullSiteUrl.slice(0, -1);
+  }
+
+  // --- 添加全局数据 ---
+  eleventyConfig.addGlobalData("env", {
+    SITE_BASE_URL: process.env.SITE_BASE_URL, // 这个是原始的 domain only
+    ELEVENTY_BASE_URL: process.env.ELEVENTY_BASE_URL // 这个是原始的 path prefix
+  });
+  // 将最终计算出的完整的 base URL 传递给模板和集合
+  eleventyConfig.addGlobalData("pathPrefix", fullSiteUrl);
 
   // 静态资源直拷
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
@@ -52,7 +92,7 @@ module.exports = function (eleventyConfig) {
         return dateB - dateA;
       });
   });
-/*
+
     // announce集合
   eleventyConfig.addCollection("announces", (collectionApi) => {
     return collectionApi
@@ -63,7 +103,7 @@ module.exports = function (eleventyConfig) {
         return dateB - dateA;
       });
   });
- */  
+   
     // 创建全部文章集合
   eleventyConfig.addCollection("allPosts", function(collectionApi) {
     const posts = collectionApi.getFilteredByGlob("src/blog/*.md");
@@ -94,14 +134,17 @@ module.exports = function (eleventyConfig) {
 
   // 搜索索引集合
   eleventyConfig.addCollection("searchIndex", (collectionApi) => {
-    // 获取 base URL，如果不存在，则默认为 https://www.antares.xin/
-    let pathPrefix = process.env.ELEVENTY_BASE_URL || "https://www.antares.xin/";
+  // 搜索索引需要生成绝对 URL。
+  // 如果 ELEVENTY_BASE_URL 存在，则使用它。
+  // 否则，使用搜索索引特有的默认绝对 URL。
+  // 这确保了即使全局 pathPrefix 是相对路径（如 "/"），搜索结果中的链接也是绝对路径。
+  let searchIndexBaseUrl = process.env.ELEVENTY_BASE_URL || "https://www.antares.xin/";
 
-    // 移除结尾的斜杠 (如果存在)
-    pathPrefix = pathPrefix.endsWith("/") ? pathPrefix.slice(0, -1) : pathPrefix;
+  // 确保它没有结尾斜杠，以便与 item.url (通常以 / 开头) 正确拼接
+  searchIndexBaseUrl = searchIndexBaseUrl.endsWith("/") ? searchIndexBaseUrl.slice(0, -1) : searchIndexBaseUrl;
     return [
       ...collectionApi.getFilteredByGlob("src/blog/*.md"),
-//      ...collectionApi.getFilteredByGlob("src/announce/*.md")
+      ...collectionApi.getFilteredByGlob("src/announce/*.md")
     ].map((item) => {
       // 从源 Markdown 读取并转为纯文本，避免过早访问 templateContent
       let textContent = "";
@@ -126,7 +169,7 @@ module.exports = function (eleventyConfig) {
       } catch (e) {
         textContent = "";
       }
-      const fullUrl = `${pathPrefix}${item.url}`; // 拼接 base URL 和相对路径
+    const fullUrl = `${searchIndexBaseUrl}${item.url}`;
 
       return {
         title: item.data.title || "",
