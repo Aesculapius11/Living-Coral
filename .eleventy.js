@@ -107,9 +107,9 @@ module.exports = function (eleventyConfig) {
     // 创建全部文章集合
   eleventyConfig.addCollection("allPosts", function(collectionApi) {
     const posts = collectionApi.getFilteredByGlob("src/blog/*.md");
-//    const announces = collectionApi.getFilteredByGlob("src/announce/*.md");
-//    return [...posts, ...announces];
-    return [...posts];
+    const announces = collectionApi.getFilteredByGlob("src/announce/*.md");
+    return [...posts, ...announces];
+//    return [...posts];
   });
 
   // 标签集合
@@ -212,14 +212,14 @@ module.exports = function (eleventyConfig) {
         changefreq: "daily",
         priority: 0.9
       },
-/*
+
         {
         url: `${baseUrl}${pathPrefix}announce/`,
         lastmod: new Date().toISOString(),
         changefreq: "daily",
         priority: 0.9
       },
-*/
+
       {
         url: `${baseUrl}${pathPrefix}search/`,
         lastmod: new Date().toISOString(),
@@ -249,7 +249,7 @@ module.exports = function (eleventyConfig) {
         priority: 0.6
       });
     });
-/*
+
         // 添加announce文章
     collectionApi.getFilteredByGlob("src/announce/*.md").forEach((item) => {
       urls.push({
@@ -259,10 +259,10 @@ module.exports = function (eleventyConfig) {
         priority: 0.6
       });
     });
- */
+ 
     // 添加分类页面
     const categories = new Set();
-    collectionApi.getFilteredByGlob("src/blog/*.md").forEach((item) => {
+    collectionApi.getAll().forEach((item) => {
       if (item.data.category) categories.add(item.data.category);
     });
     categories.forEach((category) => {

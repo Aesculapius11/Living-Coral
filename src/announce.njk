@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+title: 博客
+permalink: /announce/
+keywords: [个人博客, 博客文章, 技术教程, MC服务器, 内网穿透, CDN, 云服务器, 技术分享, MC, 服务器, 我的世界, Minecraft, 虚拟机, 星辰曦羽]
+description: "本站所有博客文章的列表"
+---
+
+<section class="max-w-6xl mx-auto px-4 py-10">
+  <h1 class="text-2xl font-bold mb-6">全部公告</h1>
+  <div class="grid gap-6 md:grid-cols-3">
+    {% for announce in collections.announces %}
+    <a href="{{ announce.url | url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="{{ loop.index0 % 6 * 60 }}">
+      {% if announce.data.cover %}
+      <div class="h-40 w-full rounded-xl overflow-hidden mb-3">
+        {% image announce.data.cover, announce.data.title, "(min-width: 768px) 320px, 100vw", "eager", "", "w-full h-full object-cover" %}
+      </div>
+      {% endif %}
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">{{ announce.date | readableDate }}</p>
+      <p class="mt-1 font-semibold">{{ announce.data.title }}</p>
+      <div class="mt-2 flex flex-wrap gap-2 text-sm">
+        {% if announce.data.category %}
+        <span class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">{{ announce.data.category }}</span>
+        {% endif %}
+        {% for tag in announce.data.tags %}
+        <span class="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">#{{ tag }}</span>
+        {% endfor %}
+        <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ announce.data.description }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+
