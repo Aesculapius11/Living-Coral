@@ -94,7 +94,11 @@ module.exports = function (eleventyConfig) {
 
   // 搜索索引集合
   eleventyConfig.addCollection("searchIndex", (collectionApi) => {
-    const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
+    // 获取 base URL，如果不存在，则默认为 https://www.antares.xin/
+    let pathPrefix = process.env.ELEVENTY_BASE_URL || "https://www.antares.xin/";
+
+    // 移除结尾的斜杠 (如果存在)
+    pathPrefix = pathPrefix.endsWith("/") ? pathPrefix.slice(0, -1) : pathPrefix;
     return [
       ...collectionApi.getFilteredByGlob("src/blog/*.md"),
 //      ...collectionApi.getFilteredByGlob("src/announce/*.md")
