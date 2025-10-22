@@ -14,7 +14,7 @@ eleventyComputed:
 <section class="max-w-6xl mx-auto px-4 py-10">
   <h1 class="text-2xl font-bold mb-6">{{ cat }}</h1>
   <div class="grid gap-6 md:grid-cols-3">
-    {% for p in collections.posts | sort('date') %}
+    {% for p in collections.allPosts | sort('date') %}
       {% if p.data.category == cat %}
       <a href="{{ p.url | url }}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition">
         {% if p.data.cover %}

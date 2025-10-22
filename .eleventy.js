@@ -41,6 +41,7 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n);
   });
 
+
   // 文章集合
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi
@@ -50,6 +51,25 @@ module.exports = function (eleventyConfig) {
         const dateB = new Date(b.date);
         return dateB - dateA;
       });
+  });
+/*
+    // announce集合
+  eleventyConfig.addCollection("announces", (collectionApi) => {
+    return collectionApi
+      .getFilteredByGlob("src/announce/*.md")
+      .sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB - dateA;
+      });
+  });
+ */  
+    // 创建全部文章集合
+  eleventyConfig.addCollection("allPosts", function(collectionApi) {
+    const posts = collectionApi.getFilteredByGlob("src/blog/*.md");
+//    const announces = collectionApi.getFilteredByGlob("src/announce/*.md");
+//    return [...posts, ...announces];
+    return [...posts];
   });
 
   // 标签集合
@@ -66,7 +86,7 @@ module.exports = function (eleventyConfig) {
   // 分类集合
   eleventyConfig.addCollection("categoryList", (collectionApi) => {
     const catSet = new Set();
-    collectionApi.getFilteredByGlob("src/blog/*.md").forEach((item) => {
+    collectionApi.getAll().forEach((item) => {
       if (item.data.category) catSet.add(item.data.category);
     });
     return [...catSet].sort();
@@ -75,7 +95,10 @@ module.exports = function (eleventyConfig) {
   // 搜索索引集合
   eleventyConfig.addCollection("searchIndex", (collectionApi) => {
     const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
-    return collectionApi.getFilteredByGlob("src/blog/*.md").map((item) => {
+    return [
+      ...collectionApi.getFilteredByGlob("src/blog/*.md"),
+//      ...collectionApi.getFilteredByGlob("src/announce/*.md")
+    ].map((item) => {
       // 从源 Markdown 读取并转为纯文本，避免过早访问 templateContent
       let textContent = "";
       try {
@@ -106,7 +129,7 @@ module.exports = function (eleventyConfig) {
         tags: item.data.tags || [],
         category: item.data.category || "",
         date: item.date,
-        url: `${pathPrefix}blog/${item.fileSlug}/`,
+        url: item.url,
         excerpt: item.data.excerpt || "",
         cover: item.data.cover || "",
         content: textContent
@@ -141,6 +164,14 @@ module.exports = function (eleventyConfig) {
         changefreq: "daily",
         priority: 0.9
       },
+/*
+        {
+        url: `${baseUrl}${pathPrefix}announce/`,
+        lastmod: new Date().toISOString(),
+        changefreq: "daily",
+        priority: 0.9
+      },
+*/
       {
         url: `${baseUrl}${pathPrefix}search/`,
         lastmod: new Date().toISOString(),
@@ -170,7 +201,17 @@ module.exports = function (eleventyConfig) {
         priority: 0.6
       });
     });
-
+/*
+        // 添加announce文章
+    collectionApi.getFilteredByGlob("src/announce/*.md").forEach((item) => {
+      urls.push({
+        url: `${baseUrl}${pathPrefix}announce/${item.fileSlug}/`,
+        lastmod: item.date ? new Date(item.date).toISOString() : new Date().toISOString(),
+        changefreq: "monthly",
+        priority: 0.6
+      });
+    });
+ */
     // 添加分类页面
     const categories = new Set();
     collectionApi.getFilteredByGlob("src/blog/*.md").forEach((item) => {
