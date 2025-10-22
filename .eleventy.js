@@ -138,7 +138,7 @@ module.exports = function (eleventyConfig) {
   // 如果 ELEVENTY_BASE_URL 存在，则使用它。
   // 否则，使用搜索索引特有的默认绝对 URL。
   // 这确保了即使全局 pathPrefix 是相对路径（如 "/"），搜索结果中的链接也是绝对路径。
-  let searchIndexBaseUrl = process.env.ELEVENTY_BASE_URL || "https://www.antares.xin/";
+  let searchIndexBaseUrl = process.env.ELEVENTY_BASE_URL || "/";
 
   // 确保它没有结尾斜杠，以便与 item.url (通常以 / 开头) 正确拼接
   searchIndexBaseUrl = searchIndexBaseUrl.endsWith("/") ? searchIndexBaseUrl.slice(0, -1) : searchIndexBaseUrl;
