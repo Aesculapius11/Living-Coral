@@ -3,7 +3,7 @@ title: 夏日MC免费联机指南： 没有公网IP？用这些免费工具和�
 description: 简单介绍如何用虚拟局域网软件进行MC联机。
 date: 2025-06-30
 tags: [游戏, MC, 联机]
-category: 游戏
+category: 技术
 keywords: [MC, 反向代理, 服务器, 我的世界, 技术, Minecraft]
 author: 星辰曦羽
 cover: https://img.antares.xin/assets/xunijuyuwang/20.webp
