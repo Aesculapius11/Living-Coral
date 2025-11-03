@@ -1,10 +1,10 @@
 ---
 title: 使用AdGuard Home 自建家庭安全DNS服务器
-description: 我通过AdGuard Home 构建家庭安全DNS解决方案。采用DOH和DOT协议加密DNS查询。AdGuard Home 还能实现广告拦截，能够自定义过滤规则，屏蔽各类广告和跟踪器。
+description: 通过AdGuard Home 构建家庭安全DNS解决方案。采用DOH和DOT协议加密DNS查询。AdGuard Home 还能实现广告拦截，能够自定义过滤规则，屏蔽各类广告和跟踪器。
 date: 2025-10-21
 tags: [AdGuard, DNS, 服务器]
 category: 技术
-keywords: [AdGuard, DNS, AdGuard Home]
+keywords: [AdGuard, DNS, AdGuard Home,  PCDN, CDN]
 author: 星辰曦羽
 cover: https://img.antares.xin/assets/adguard/1.webp
 layout: layouts/post.njk
@@ -136,3 +136,46 @@ quic://dns.alidns.com
 说真的，你也是真牛逼，繁殖能力堪比广东小精灵，给我整烦了你们一家一起死。  
 {% image "https://img.antares.xin/assets/adguard/8.png", "自定义规则" %}  
 {% image "https://img.antares.xin/assets/adguard/9.webp", "自定义规则" %}  
+
+## 2025年11月03日补充
+通过AdGuard Home 屏蔽PCDN域以解决B站看视频卡顿问题  
+昨天看到个B站大佬[运维小周](https://space.bilibili.com/3546827137747590)的视频——[[补档]看视频经常卡顿？原因是什么？](https://www.bilibili.com/video/BV17MydBhEYL/)  
+简单来说就是，B站的PCDN域的节点质量良莠不齐，可能会导致播放卡顿，并且B站的首选URL就是PCDN域，备用URL才是专门的CDN域。我们可以通过屏蔽PCDN域，使视频的流量走备用URL也就是专门的CDN域以获取更高质量的连接。
+
+我在自定义规则新增规则如下：
+```
+#主流ICP PCDN域
+||gjfzpt.cn^
+||szbdyd.com^
+||bsccdn.net^
+||pkoplink.com^
+||saxysec.com^
+||uhabo.com^
+||xycdn.com^
+||kuiniuca.com^
+||onethingpcs.com^
+||jomodns.cn^
+||p2p.huya.com^
+||stun.douyucdn.cn^
+||stun.hitv.com^
+||stun1.douyucdn.cn^
+||mcdn.bilivideo.cn^
+||tpa-hcdn.iqiyi.com^
+||pcdn.xmcdn.com^
+||pcdn.yximgs.com^
+||dyp2p-ali.douyucdn.cn^
+||dyp2p-hw.douyucdn.cn^
+||p2p-ali.douyucdn.cn^
+||p2p.qq.com^
+||p2pchunk-hw.douyucdn.cn^
+||p2pchunk-table.douyucdn.cn^
+||p2pchunk-ws.douyucdn.cn^
+||p2perrorlog.douyucdn.cn^
+||p2plive-ali.douyucdn.cn^
+||p2plive-ws.douyucdn.cn^
+||p2plog.douyucdn.cn^
+||p2ptun.qq.com^
+||p2pupdate.gamedl.qq.com^
+||p2pupgrade.gamedl.qq.com^
+||p2pvod-ws.douyucdn.cn^
+```
