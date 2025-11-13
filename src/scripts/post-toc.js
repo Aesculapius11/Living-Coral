@@ -8,6 +8,25 @@
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
     const tocItems = [];
 
+    // Helper: create a slug from heading text. Keep ASCII word chars and a common
+    // range for CJK (Chinese) characters. Falls back to a numeric id if empty.
+    function slugify(str) {
+      if (!str) return '';
+      // Normalize diacritics, convert to lower case
+      let s = String(str).normalize('NFKD').toLowerCase().trim();
+      // Replace whitespace with dashes
+      s = s.replace(/\s+/g, '-');
+      // Remove characters except word chars, dash, and basic CJK range
+      s = s.replace(/[^\w\-\u4e00-\u9fff]/g, '');
+      // Collapse multiple dashes
+      s = s.replace(/-+/g, '-');
+      // Trim leading/trailing dashes
+      s = s.replace(/^[-]+|[-]+$/g, '');
+      return s;
+    }
+
+    const usedIds = new Set();
+
     headings.forEach((heading, index) => {
       const isInToc = heading.closest('#tableOfContents, #mobileTableOfContents, aside');
       if (isInToc) return;
@@ -20,8 +39,33 @@
 
       if (heading.tagName === 'H1') return;
 
-      const id = heading.id || `heading-${index}`;
-      heading.id = id;
+      // Preserve existing id if present, otherwise generate from text
+      let id = heading.id && String(heading.id).trim();
+      if (id) {
+        // Ensure uniqueness for existing ids
+        if (usedIds.has(id)) {
+          let i = 1;
+          let newId;
+          do {
+            newId = `${id}-${i}`;
+            i += 1;
+          } while (usedIds.has(newId));
+          id = newId;
+        }
+        usedIds.add(id);
+        heading.id = id;
+      } else {
+        const base = slugify(text) || `heading-${index}`;
+        let candidate = base;
+        let counter = 0;
+        while (usedIds.has(candidate)) {
+          counter += 1;
+          candidate = `${base}-${counter}`;
+        }
+        id = candidate;
+        usedIds.add(id);
+        heading.id = id;
+      }
 
       const level = parseInt(heading.tagName.charAt(1), 10);
       tocItems.push({ id, text, level });
@@ -115,6 +159,20 @@
             }
           }
           currentActiveId = activeId;
+          // When the active heading changes due to scrolling, update the URL hash
+          // using replaceState so we don't pollute the browser history.
+          try {
+            if (activeId) {
+              const newHash = `#${activeId}`;
+              if (location.hash !== newHash) {
+                history.replaceState(null, null, newHash);
+              }
+            }
+          } catch (e) {
+            // Some older browsers or restricted environments may throw; ignore.
+            // eslint-disable-next-line no-console
+            console && console.warn && console.warn('Failed to update URL hash for TOC', e);
+          }
         }
       }
 
