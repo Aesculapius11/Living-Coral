@@ -6,7 +6,7 @@ tags: [EVE Online, AI]
 category: 游戏
 keywords: [EVE Online, AI, 翻译]
 author: 星辰曦羽
-cover: https://img.antares.xin/assets/EVE小说/1.webp
+cover: https://img.antares.xin/assets/EVEnovel/1.webp
 layout: layouts/post.njk
 ---
 
@@ -17,8 +17,8 @@ EVE的官方小说在国内只出版了一本《寰宇时代》，《圣殿骑�
 
 英文原版都来自于[张纸易人](https://www.bilibili.com/read/cv12512554/)大佬分享的版本，要看《寰宇时代》的也可以去这里找。  
 
-# 下载
-[圣殿骑士一号 中翻](https://img.antares.xin/assets/EVE小说/Eve：Templar-One-EVE官方小说三部曲.zh.epub)  
-[圣殿骑士一号 中英对照](https://img.antares.xin/assets/EVE小说/Eve：Templar-One-EVE官方小说三部曲.en.zh.epub)  
-[燃烧的生命 中翻](https://img.antares.xin/assets/EVE小说/Eve：The-Burning-Life-EVE官方小说三部曲.zh.epub)  
-[燃烧的生命 中英对照](https://img.antares.xin/assets/EVE小说/Eve：The-Burning-Life-EVE官方小说三部曲.en.zh.epub)
+## 下载
+[圣殿骑士一号 中翻](https://img.antares.xin/assets/EVEnovel/Eve：Templar-One-EVE官方小说三部曲.zh.epub)  
+[圣殿骑士一号 中英对照](https://img.antares.xin/assets/EVEnovel/Eve：Templar-One-EVE官方小说三部曲.en.zh.epub)  
+[燃烧的生命 中翻](https://img.antares.xin/assets/EVEnovel/Eve：The-Burning-Life-EVE官方小说三部曲.zh.epub)  
+[燃烧的生命 中英对照](https://img.antares.xin/assets/EVEnovel/Eve：The-Burning-Life-EVE官方小说三部曲.en.zh.epub)
