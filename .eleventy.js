@@ -11,6 +11,8 @@ module.exports = function (eleventyConfig) {
         Prism.languages.shell = Prism.languages.bash || Prism.languages.shell;
         Prism.languages.sh = Prism.languages.bash || Prism.languages.sh;
         Prism.languages.conf = Prism.languages.ini || Prism.languages.conf;
+        Prism.languages.docker = Prism.languages.bash || Prism.languages.docker;
+        Prism.languages.dockerfile = Prism.languages.bash || Prism.languages.dockerfile;
       } catch (e) {}
     },
   });
