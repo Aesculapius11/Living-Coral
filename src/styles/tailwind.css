@@ -83,6 +83,12 @@
     word-break: break-word; /* 兼容性兜底 */
   }
 
+  /* 修复 Prism 代码块字体大小不一致问题 */
+  .prose pre[class*="language-"] code,
+  .prose pre:has(> code[class*="language-"]) code {
+    @apply text-sm leading-relaxed; /* 确保所有代码文本使用相同字体大小 */
+  }
+
   /* 移动端代码块优化 */
   @media (max-width: 768px) {
     .prose pre {
