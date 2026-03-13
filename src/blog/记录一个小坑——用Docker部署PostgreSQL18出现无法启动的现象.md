@@ -24,7 +24,7 @@ POSTGRES_PORT=5432
 
 再新建一个`docker-compose.yml`文件来写配置  
 
-```dockerfile
+```shell
 version: '3.8'
 services:
  postgres:
@@ -82,7 +82,7 @@ Error: in 18+, these Docker images are configured to store database data in a
 
 先删除`pgdata`文件夹再修改`docker-compose.yml`文件  
 
-```dockerfile
+```conf
 version: '3.8'
 services:
  postgres:
