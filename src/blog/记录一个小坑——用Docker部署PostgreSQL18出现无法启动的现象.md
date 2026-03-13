@@ -103,47 +103,4 @@ networks:
    driver: bridge
 ```
 
-```yml
-version: '3.8'
-services:
- postgres:
-   image: postgres:18
-   container_name: postgres18
-   restart: always
-   env_file:
-     - .env
-   ports:
-     - "${POSTGRES_PORT}:5432"
-   volumes:
-     - ./pgdata:/var/lib/postgresql
-     - ./log:/var/log/postgresql
-   networks:
-     - postgres_net
-networks:
- postgres_net:
-   driver: bridge
-```
-
-
-```yaml
-version: '3.8'
-services:
- postgres:
-   image: postgres:18
-   container_name: postgres18
-   restart: always
-   env_file:
-     - .env
-   ports:
-     - "${POSTGRES_PORT}:5432"
-   volumes:
-     - ./pgdata:/var/lib/postgresql
-     - ./log:/var/log/postgresql
-   networks:
-     - postgres_net
-networks:
- postgres_net:
-   driver: bridge
-```
-
 再执行`docker-compose up -d`就可以了
