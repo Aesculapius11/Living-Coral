@@ -72,7 +72,7 @@ Error: in 18+, these Docker images are configured to store database data in a
        discussion around this process, and suggestions for how to do so.
 ```
 
-{% image "https://img.antares.xin/assets/pg18/2.webp", "log" %}   
+{% image "https://img.antares.xin/assets/pg18/2.png", "log" %}   
 
 我去查了一下这是什么错误，结果发现这看起来是PostgreSQL 17 升级到PostgreSQL 18 时候会发生的错误，这就很奇怪了，明明我是新装的数据库，怎么要升级了？
 
