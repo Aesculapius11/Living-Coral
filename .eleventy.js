@@ -3,6 +3,9 @@ const { DateTime } = require("luxon");
 const fs = require("fs");
 const Image = require("@11ty/eleventy-img");
 
+// 加载 Prism 的 dockerfile 组件
+require('prismjs/components/prism-dockerfile');
+
 module.exports = function (eleventyConfig) {
   // 构建期语法高亮（Prism）；添加语言别名
   eleventyConfig.addPlugin(syntaxHighlight, {
@@ -11,8 +14,6 @@ module.exports = function (eleventyConfig) {
         Prism.languages.shell = Prism.languages.bash || Prism.languages.shell;
         Prism.languages.sh = Prism.languages.bash || Prism.languages.sh;
         Prism.languages.conf = Prism.languages.ini || Prism.languages.conf;
-        Prism.languages.docker = Prism.languages.yml || Prism.languages.docker;
-        Prism.languages.dockerfile = Prism.languages.yml || Prism.languages.dockerfile;
       } catch (e) {}
     },
   });
