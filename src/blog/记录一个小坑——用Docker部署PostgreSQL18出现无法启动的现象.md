@@ -82,7 +82,7 @@ Error: in 18+, these Docker images are configured to store database data in a
 
 先删除`pgdata`文件夹再修改`docker-compose.yml`文件  
 
-```yml
+```dockerfile
 version: '3.8'
 services:
  postgres:
