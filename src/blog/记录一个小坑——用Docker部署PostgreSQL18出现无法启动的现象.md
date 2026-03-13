@@ -82,7 +82,50 @@ Error: in 18+, these Docker images are configured to store database data in a
 
 先删除`pgdata`文件夹再修改`docker-compose.yml`文件  
 
-```dockerfile
+```docker
+version: '3.8'
+services:
+ postgres:
+   image: postgres:18
+   container_name: postgres18
+   restart: always
+   env_file:
+     - .env
+   ports:
+     - "${POSTGRES_PORT}:5432"
+   volumes:
+     - ./pgdata:/var/lib/postgresql
+     - ./log:/var/log/postgresql
+   networks:
+     - postgres_net
+networks:
+ postgres_net:
+   driver: bridge
+```
+
+```yml
+version: '3.8'
+services:
+ postgres:
+   image: postgres:18
+   container_name: postgres18
+   restart: always
+   env_file:
+     - .env
+   ports:
+     - "${POSTGRES_PORT}:5432"
+   volumes:
+     - ./pgdata:/var/lib/postgresql
+     - ./log:/var/log/postgresql
+   networks:
+     - postgres_net
+networks:
+ postgres_net:
+   driver: bridge
+```
+
+
+```yaml
 version: '3.8'
 services:
  postgres:
