@@ -3,6 +3,10 @@ const { DateTime } = require("luxon");
 const fs = require("fs");
 const Image = require("@11ty/eleventy-img");
 
+// 加载 Prism 的 docker 组件（以及 YAML，用于复用高亮规则）
+require('prismjs/components/prism-docker');
+require('prismjs/components/prism-yaml');
+
 module.exports = function (eleventyConfig) {
   // 构建期语法高亮（Prism）；添加语言别名
   eleventyConfig.addPlugin(syntaxHighlight, {
