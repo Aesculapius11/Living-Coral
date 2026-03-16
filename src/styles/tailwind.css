@@ -321,35 +321,51 @@
   .dark .aplayer .aplayer-lrc p.aplayer-lrc-current { color: #FC766A; }
 }
 
-/* 大纲栏样式 */
-.table-of-contents {
+/* 大纲栏样式（桌面和移动） */
+.table-of-contents,
+#tableOfContents {
+  /* 使用细滚动条 */
   scrollbar-width: thin;
+  /* 滚动条 thumb 和 track 颜色 */
   scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
 }
 
-.table-of-contents::-webkit-scrollbar {
+.table-of-contents::-webkit-scrollbar,
+#tableOfContents::-webkit-scrollbar {
+  /* WebKit 系统滚动条宽度 */
   width: 4px;
 }
 
-.table-of-contents::-webkit-scrollbar-track {
+.table-of-contents::-webkit-scrollbar-track,
+#tableOfContents::-webkit-scrollbar-track {
+  /* 滚动条轨道背景透明 */
   background: transparent;
 }
 
-.table-of-contents::-webkit-scrollbar-thumb {
+.table-of-contents::-webkit-scrollbar-thumb,
+#tableOfContents::-webkit-scrollbar-thumb {
+  /* 滚动条拇指默认颜色 */
   background-color: rgba(156, 163, 175, 0.3);
-  border-radius: 2px;
+  /* 圆角 */
+  border-radius: 999px;
 }
 
-.table-of-contents::-webkit-scrollbar-thumb:hover {
+.table-of-contents::-webkit-scrollbar-thumb:hover,
+#tableOfContents::-webkit-scrollbar-thumb:hover {
+  /* 悬停状态颜色 */
   background-color: rgba(156, 163, 175, 0.5);
 }
 
-.dark .table-of-contents::-webkit-scrollbar-thumb {
-  background-color: rgba(156, 163, 175, 0.3);
+.dark .table-of-contents::-webkit-scrollbar-thumb,
+.dark #tableOfContents::-webkit-scrollbar-thumb {
+  /* 深色模式：滚动条拇指颜色 */
+  background-color: rgba(156, 163, 175, 0.35);
 }
 
-.dark .table-of-contents::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(156, 163, 175, 0.5);
+.dark .table-of-contents::-webkit-scrollbar-thumb:hover,
+.dark #tableOfContents::-webkit-scrollbar-thumb:hover {
+  /* 深色模式：悬停颜色 */
+  background-color: rgba(156, 163, 175, 0.6);
 }
 
 /* 大纲链接悬停效果 */
@@ -603,3 +619,5 @@
 .dark .friends-links-scroll::-webkit-scrollbar-thumb:hover {
   background-color: rgba(252, 118, 106, 0.6);
 }
+
+/* 文章侧边目录滚动条 */
