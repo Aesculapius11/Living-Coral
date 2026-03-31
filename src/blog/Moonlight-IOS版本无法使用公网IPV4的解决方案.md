@@ -1,6 +1,6 @@
 ---
 title: Moonlight IOS版本无法使用公网IPV4的解决方案
-description: 作为一个曾经为了能够更爽的打游戏，从而始终扛着台式机箱往返于学校与家之间硬核狠人（冤种），在经历了买航空箱、换小机箱等一系列操作后，终于找到一个能够爽打游戏的串流方案。
+description: Moonlight的IOS版本无法使用公网IPV4，可以通过将IPV4转换成IPV6地址来解决无法串流的问题。
 date: 2026-03-31
 tags: [串流, 游戏]
 category: 杂项
