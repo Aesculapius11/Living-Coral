@@ -18,33 +18,44 @@ layout: layouts/post.njk
  
 我自己的使用感受：界面好看，部署简单，全文搜索和缩略图功能可以正常使用，总的来说很不错。这玩意儿适合怎么样的用户呢？自己有个nas的，有公网ip的。这样的用户可以用起来很爽。
 ## 部署
+
 部署依然是用docker compose。先来到[官方文档](https://docs.cloudreve.org/zh/overview/deploy/docker-compose)
 先将必要的文件下载到本地
+
 ```bash
 git clone
 https://github.com/cloudreve/docker-compose.git
 ~/cloudreve
 cd ~/cloudreve
 ```
+
 复制env文件
+
 ```bash
 cp .env.example .env
 ```
+
 生成密钥  
+
 {% image "https://img.antares.xin/assets/cloudreve/2.png", "密钥" %}  
+
 ```bash
 # 生成 Master Key
 openssl rand -hex 32
 
 # 编辑 .env 文件，设置 MEILI_MASTER_KEY=<生成的密钥>
 ```
-编辑环境变量，把生成的密钥粘贴进去   
+
+编辑环境变量，把生成的密钥粘贴进去  
+
 ```bash
 sudo vim .env
 ```
+
 {% image "https://img.antares.xin/assets/cloudreve/3.png", "密钥" %}  
+
 最后，docker～启动！  
-`docker compose -f docker-compose.yml -f docker-compose.fts.yml up -d`
+`docker compose -f docker-compose.yml -f docker-compose.fts.yml up -d`  
 不报错就部署完成了  
 访问http://localhost:5212就能看到Cloudreve了  
 {% image "https://img.antares.xin/assets/cloudreve/4.webp", "主菜单" %}  
