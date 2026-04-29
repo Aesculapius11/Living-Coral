@@ -42,7 +42,7 @@ openssl rand -hex 32
 ```bash
 sudo vim .env
 ```
-{% image "https://img.antares.xin/assets/cloudreve/3.png", "密钥" %} 
+{% image "https://img.antares.xin/assets/cloudreve/3.png", "密钥" %}  
 最后，docker～启动！  
 `docker compose -f docker-compose.yml -f docker-compose.fts.yml up -d`
 不报错就部署完成了  
