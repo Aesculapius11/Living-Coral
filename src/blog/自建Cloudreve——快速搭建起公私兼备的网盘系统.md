@@ -20,29 +20,29 @@ layout: layouts/post.njk
 ## 部署
 部署依然是用docker compose。先来到[官方文档](https://docs.cloudreve.org/zh/overview/deploy/docker-compose)
 先将必要的文件下载到本地
-```
+```bash
 git clone
 https://github.com/cloudreve/docker-compose.git
 ~/cloudreve
 cd ~/cloudreve
 ```
 复制env文件
-```
+```bash
 cp .env.example .env
 ```
 生成密钥  
 {% image "https://img.antares.xin/assets/cloudreve/2.png", "密钥" %}  
-```
+```bash
 # 生成 Master Key
 openssl rand -hex 32
 
 # 编辑 .env 文件，设置 MEILI_MASTER_KEY=<生成的密钥>
 ```
-编辑环境变量，把生成的密钥粘贴进去  
-{% image "https://img.antares.xin/assets/cloudreve/3.png", "密钥" %}  
-```
+编辑环境变量，把生成的密钥粘贴进去   
+```bash
 sudo vim .env
 ```
+{% image "https://img.antares.xin/assets/cloudreve/3.png", "密钥" %} 
 最后，docker～启动！  
 `docker compose -f docker-compose.yml -f docker-compose.fts.yml up -d`
 不报错就部署完成了  
