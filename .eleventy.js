@@ -7,6 +7,44 @@ const Image = require("@11ty/eleventy-img");
 require('prismjs/components/prism-docker');
 require('prismjs/components/prism-yaml');
 
+function normalizePathPrefix(prefix = "/") {
+  let normalized = prefix || "/";
+  if (!normalized.startsWith("/")) {
+    normalized = `/${normalized}`;
+  }
+  if (normalized.length > 1 && normalized.endsWith("/")) {
+    normalized = normalized.slice(0, -1);
+  }
+  return normalized || "/";
+}
+
+function buildAbsoluteUrl(baseUrl, pathPrefix = "/", pathname = "") {
+  const normalizedBase = (baseUrl || "").endsWith("/")
+    ? baseUrl.slice(0, -1)
+    : (baseUrl || "");
+  const normalizedPrefix = normalizePathPrefix(pathPrefix);
+  const prefixPart = normalizedPrefix === "/" ? "" : normalizedPrefix;
+  const cleanPath = String(pathname || "").replace(/^\/+|\/+$/g, "");
+
+  if (!cleanPath) {
+    return `${normalizedBase}${prefixPart}/`;
+  }
+
+  return `${normalizedBase}${prefixPart}/${cleanPath}/`;
+}
+
+function buildPrefixedPath(pathPrefix = "/", pathname = "") {
+  const normalizedPrefix = normalizePathPrefix(pathPrefix);
+  const prefixPart = normalizedPrefix === "/" ? "" : normalizedPrefix;
+  const cleanPath = String(pathname || "").replace(/^\/+/, "");
+
+  if (!cleanPath) {
+    return `${prefixPart || "/"}`;
+  }
+
+  return `${prefixPart}/${cleanPath}`;
+}
+
 module.exports = function (eleventyConfig) {
   // 构建期语法高亮（Prism）；添加语言别名
   eleventyConfig.addPlugin(syntaxHighlight, {
@@ -39,27 +77,11 @@ module.exports = function (eleventyConfig) {
   primaryBaseUrl = primaryBaseUrl.endsWith('/') ? primaryBaseUrl.slice(0, -1) : primaryBaseUrl;
 
   // 2. 获取路径前缀部分 (ELEVENTY_BASE_URL)
-  let repoPathPrefix = process.env.ELEVENTY_BASE_URL || "/"; // 默认为根路径
-  // 确保 repoPathPrefix 以 / 开头，但不以 / 结尾 (除非它就是 "/")
-  if (!repoPathPrefix.startsWith('/')) {
-    repoPathPrefix = '/' + repoPathPrefix;
-  }
-  if (repoPathPrefix.length > 1 && repoPathPrefix.endsWith('/')) {
-    repoPathPrefix = repoPathPrefix.slice(0, -1);
-  }
-  // 如果 repoPathPrefix 就是 "/"，则保持它
-  if (repoPathPrefix === "") { // 防止空字符串导致拼接问题
-    repoPathPrefix = "/";
-  }
+  let repoPathPrefix = normalizePathPrefix(process.env.ELEVENTY_BASE_URL || "/");
 
   // 3. 组合得到最终的完整 base URL
   // 例如：https://aesculapius11.github.io + /your-repo-name
-  let fullSiteUrl = `${primaryBaseUrl}${repoPathPrefix}`;
-
-  // 确保 fullSiteUrl 不以 / 结尾，因为 item.url 往往以 / 开头
-  if (fullSiteUrl.endsWith('/')) {
-    fullSiteUrl = fullSiteUrl.slice(0, -1);
-  }
+  let fullSiteUrl = buildAbsoluteUrl(primaryBaseUrl, repoPathPrefix).replace(/\/$/, "");
 
   // --- 添加全局数据 ---
   eleventyConfig.addGlobalData("env", {
@@ -86,6 +108,13 @@ module.exports = function (eleventyConfig) {
     if (!Array.isArray(array)) return [];
     if (!n || n <= 0) return [];
     return array.slice(0, n);
+  });
+
+  eleventyConfig.addFilter("json", (value) => {
+    return JSON.stringify(value)
+      .replace(/</g, "\\u003c")
+      .replace(/>/g, "\\u003e")
+      .replace(/&/g, "\\u0026");
   });
 
 
@@ -145,10 +174,7 @@ module.exports = function (eleventyConfig) {
   // 如果 ELEVENTY_BASE_URL 存在，则使用它。
   // 否则，使用搜索索引特有的默认绝对 URL。
   // 这确保了即使全局 pathPrefix 是相对路径（如 "/"），搜索结果中的链接也是绝对路径。
-  let searchIndexBaseUrl = process.env.ELEVENTY_BASE_URL || "/";
-
-  // 确保它没有结尾斜杠，以便与 item.url (通常以 / 开头) 正确拼接
-  searchIndexBaseUrl = searchIndexBaseUrl.endsWith("/") ? searchIndexBaseUrl.slice(0, -1) : searchIndexBaseUrl;
+  let searchIndexBaseUrl = normalizePathPrefix(process.env.ELEVENTY_BASE_URL || "/");
     return [
       ...collectionApi.getFilteredByGlob("src/blog/*.md"),
       ...collectionApi.getFilteredByGlob("src/announce/*.md")
@@ -176,7 +202,7 @@ module.exports = function (eleventyConfig) {
       } catch (e) {
         textContent = "";
       }
-    const fullUrl = `${searchIndexBaseUrl}${item.url}`;
+    const fullUrl = `${searchIndexBaseUrl === "/" ? "" : searchIndexBaseUrl}${item.url}`;
 
       return {
         title: item.data.title || "",
@@ -198,49 +224,49 @@ module.exports = function (eleventyConfig) {
     const baseUrl = process.env.SITE_BASE_URL || 
                    collectionApi.getAll()[0]?.data?.site?.baseUrl || 
                    "https://www.antares.xin";
-    const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
+    const pathPrefix = normalizePathPrefix(process.env.ELEVENTY_BASE_URL || "/");
     
     const urls = [
       {
-        url: `${baseUrl}${pathPrefix}`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix),
         lastmod: new Date().toISOString(),
         changefreq: "daily",
         priority: 1.0
       },
       {
-        url: `${baseUrl}${pathPrefix}about/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, "about"),
         lastmod: new Date().toISOString(),
         changefreq: "monthly",
         priority: 0.8
       },
       {
-        url: `${baseUrl}${pathPrefix}blog/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, "blog"),
         lastmod: new Date().toISOString(),
         changefreq: "daily",
         priority: 0.9
       },
 
         {
-        url: `${baseUrl}${pathPrefix}announce/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, "announce"),
         lastmod: new Date().toISOString(),
         changefreq: "daily",
         priority: 0.9
       },
 
       {
-        url: `${baseUrl}${pathPrefix}search/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, "search"),
         lastmod: new Date().toISOString(),
         changefreq: "weekly",
         priority: 0.8
       },
       {
-        url: `${baseUrl}${pathPrefix}categories/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, "categories"),
         lastmod: new Date().toISOString(),
         changefreq: "weekly",
         priority: 0.7
       },
       {
-        url: `${baseUrl}${pathPrefix}tags/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, "tags"),
         lastmod: new Date().toISOString(),
         changefreq: "weekly",
         priority: 0.7
@@ -250,7 +276,7 @@ module.exports = function (eleventyConfig) {
     // 添加博客文章
     collectionApi.getFilteredByGlob("src/blog/*.md").forEach((item) => {
       urls.push({
-        url: `${baseUrl}${pathPrefix}blog/${item.fileSlug}/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, `blog/${item.fileSlug}`),
         lastmod: item.date ? new Date(item.date).toISOString() : new Date().toISOString(),
         changefreq: "monthly",
         priority: 0.6
@@ -260,7 +286,7 @@ module.exports = function (eleventyConfig) {
         // 添加announce文章
     collectionApi.getFilteredByGlob("src/announce/*.md").forEach((item) => {
       urls.push({
-        url: `${baseUrl}${pathPrefix}announce/${item.fileSlug}/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, `announce/${item.fileSlug}`),
         lastmod: item.date ? new Date(item.date).toISOString() : new Date().toISOString(),
         changefreq: "monthly",
         priority: 0.6
@@ -274,7 +300,7 @@ module.exports = function (eleventyConfig) {
     });
     categories.forEach((category) => {
       urls.push({
-        url: `${baseUrl}${pathPrefix}categories/${category}/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, `categories/${encodeURIComponent(String(category))}`),
         lastmod: new Date().toISOString(),
         changefreq: "weekly",
         priority: 0.5
@@ -290,7 +316,7 @@ module.exports = function (eleventyConfig) {
     });
     tags.forEach((tag) => {
       urls.push({
-        url: `${baseUrl}${pathPrefix}tags/${tag}/`,
+        url: buildAbsoluteUrl(baseUrl, pathPrefix, `tags/${encodeURIComponent(String(tag))}`),
         lastmod: new Date().toISOString(),
         changefreq: "weekly",
         priority: 0.5
@@ -316,7 +342,7 @@ module.exports = function (eleventyConfig) {
       const isExternalImage = src.includes("img.antares.xin");
 
       // 获取环境变量中的路径前缀
-      const pathPrefix = process.env.ELEVENTY_BASE_URL || "/";
+      const pathPrefix = normalizePathPrefix(process.env.ELEVENTY_BASE_URL || "/");
 
       if (isExternalImage) {
         // 提取路径和文件名
@@ -328,30 +354,35 @@ module.exports = function (eleventyConfig) {
 
         // 生成规范化的输出路径
         const outputDir = `_site/img${dir}`; // e.g., _site/img/atm10air
-        const urlPath = `${pathPrefix}img${dir}`; // e.g., /livingcoral/img/atm10air
+        const urlPath = buildPrefixedPath(pathPrefix, `img${dir}`); // e.g., /livingcoral/img/atm10air
 
         // 生成LQIP + 原始图片的渐进式加载
-        const metadata = await Image(src, {
-          widths: [24], // 只生成最小的LQIP图片
-          formats: ["jpeg"],
-          outputDir: outputDir,
-          urlPath: urlPath,
-          sharpJpegOptions: { quality: 20 }, // 极低质量用于LQIP
-          filenameFormat: function (id, src, width, format, options) {
-            return `${name}-${width}.${format}`; // e.g., 1-24.jpeg
-          },
-        });
-
-        const lowsrc = metadata.jpeg[0];
         const safeAlt = String(alt || "").replace(/"/g, "&quot;");
         const priorityAttr = fetchpriority ? ` fetchpriority="${fetchpriority}"` : "";
         const pictureClassAttr = classNames ? ` class="${classNames}"` : "";
         const pictureStyleAttr = style ? ` style="${style}"` : "";
 
-        // 生成唯一ID用于JavaScript处理
-        const imageId = `progressive-img-${Math.random().toString(36).substr(2, 9)}`;
+        try {
+          const metadata = await Image(src, {
+            widths: [24], // 只生成最小的LQIP图片
+            formats: ["jpeg"],
+            outputDir: outputDir,
+            urlPath: urlPath,
+            sharpJpegOptions: { quality: 20 }, // 极低质量用于LQIP
+            filenameFormat: function (id, src, width, format, options) {
+              return `${name}-${width}.${format}`; // e.g., 1-24.jpeg
+            },
+          });
 
-        return `<picture${pictureClassAttr}${pictureStyleAttr} data-original-src="${src}">
+          const generatedEntries = metadata.jpeg || metadata.jpg || Object.values(metadata)[0];
+          const lowsrc = generatedEntries && generatedEntries[0];
+          if (!lowsrc) {
+            throw new Error("No optimized image output was generated");
+          }
+          // 生成唯一ID用于JavaScript处理
+          const imageId = `progressive-img-${Math.random().toString(36).substr(2, 9)}`;
+
+          return `<picture${pictureClassAttr}${pictureStyleAttr} data-original-src="${src}">
   <img
     id="${imageId}"
     src="${lowsrc.url}"
@@ -364,13 +395,17 @@ module.exports = function (eleventyConfig) {
     onload="loadOriginalImage('${imageId}', '${src}')"
   />
 </picture>`;
+        } catch (e) {
+          console.warn(`Failed to optimize external image ${src}: ${e.message}`);
+          return `<img src="${src}" alt="${safeAlt}" loading="${loading}" decoding="async"${priorityAttr}${pictureClassAttr}${pictureStyleAttr} style="width:100%;height:100%;display:block;object-fit:cover;" />`;
+        }
       } else {
         // 对于本地图片，使用原有的响应式图片处理
         const metadata = await Image(src, {
           widths: [24, 320, 640, 1024, 1600],
           formats: ["webp", "jpeg"],
           outputDir: "_site/img",
-          urlPath: `${pathPrefix}img`,
+          urlPath: buildPrefixedPath(pathPrefix, "img"),
           sharpWebpOptions: { quality: 70 },
           sharpJpegOptions: { quality: 76 },
         });
@@ -408,7 +443,7 @@ module.exports = function (eleventyConfig) {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
-    pathPrefix: process.env.ELEVENTY_BASE_URL || "/",
+    pathPrefix: normalizePathPrefix(process.env.ELEVENTY_BASE_URL || "/"),
   };
 };
 

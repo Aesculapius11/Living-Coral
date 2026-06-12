@@ -4,10 +4,10 @@
   "private": true,
   "description": "现代化个人博客（Eleventy + Tailwind）主题色 #FC766A",
   "scripts": {
-    "dev": "concurrently \"npx eleventy --serve\" \"npm:css:watch\"",
-    "build": "npx eleventy && npm run css:build",
-    "css:build": "npx tailwindcss -i ./src/styles/tailwind.css -o ./_site/assets/styles.css --minify",
-    "css:watch": "npx tailwindcss -i ./src/styles/tailwind.css -o ./_site/assets/styles.css --watch",
+    "dev": "concurrently \"eleventy --serve\" \"npm:css:watch\"",
+    "build": "eleventy && npm run css:build",
+    "css:build": "tailwindcss -i ./src/styles/tailwind.css -o ./_site/assets/styles.css --minify",
+    "css:watch": "tailwindcss -i ./src/styles/tailwind.css -o ./_site/assets/styles.css --watch",
     "clean": "rimraf _site .cache"
   },
   "devDependencies": {

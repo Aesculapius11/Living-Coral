@@ -190,6 +190,9 @@ class BlogSearch {
 
     // 生成唯一ID用于JavaScript处理
     const imageId = `progressive-img-${Math.random().toString(36).substr(2, 9)}`;
+    const safeTitle = this.escapeHtml(result.title || '');
+    const safeDescription = this.escapeHtml(result.description || '');
+    const safeCategory = this.escapeHtml(result.category || '');
 
     return `
       <a href="${result.url}" class="block p-5 rounded-2xl border border-black/5 dark:border-white/10 hover:border-livingCoral transition" data-aos="fade-up" data-aos-delay="${Math.floor(Math.random() * 6) * 60}">
@@ -197,8 +200,8 @@ class BlogSearch {
           <picture data-original-src="${cover}">
             <img
               id="${imageId}"
-              src="${lowResCover}"
-              alt="${result.title}"
+              src="${lowResCover || cover}"
+              alt="${safeTitle}"
               loading="lazy"
               decoding="async"
               style="width:100%;height:100%;display:block;object-fit:cover;filter:blur(10px);transition:filter 0.3s ease;"
@@ -207,12 +210,12 @@ class BlogSearch {
           </picture>
         </div>` : ''}
         <p class="text-sm text-neutral-500 dark:text-neutral-400">${date}</p>
-        <p class="mt-1 font-semibold text-neutral-900 dark:text-white">${this.highlightText(result.title)}</p>
+        <p class="mt-1 font-semibold text-neutral-900 dark:text-white">${this.highlightText(safeTitle)}</p>
         <div class="mt-2 flex flex-wrap gap-2 text-sm">
-          ${result.category ? `<span class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">${result.category}</span>` : ''}
-          ${result.tags && result.tags.length > 0 ? result.tags.map(tag => `<span class="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">#${tag}</span>`).join('') : ''}
+          ${result.category ? `<span class="px-2 py-0.5 rounded bg-livingCoral/10 text-livingCoral">${safeCategory}</span>` : ''}
+          ${result.tags && result.tags.length > 0 ? result.tags.map(tag => `<span class="px-2 py-0.5 rounded bg-black/5 dark:bg-white/10">#${this.escapeHtml(tag)}</span>`).join('') : ''}
         </div>
-        <p class="mt-2 text-neutral-600 dark:text-neutral-400">${this.highlightText(result.description)}</p>
+        <p class="mt-2 text-neutral-600 dark:text-neutral-400">${this.highlightText(safeDescription)}</p>
         <div class="mt-3 text-xs text-neutral-400">
           <span class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">相关度: ${result.score}</span>
         </div>
@@ -230,7 +233,7 @@ class BlogSearch {
     let highlightedText = text;
 
     queryWords.forEach(word => {
-      const regex = new RegExp(`(${word})`, 'gi');
+      const regex = new RegExp(`(${this.escapeRegExp(word)})`, 'gi');
       const classes = extraClasses && extraClasses.length > 0
         ? `${extraClasses} px-1 rounded`
         : 'bg-yellow-200 dark:bg-yellow-800 px-1 rounded';
@@ -238,6 +241,19 @@ class BlogSearch {
     });
 
     return highlightedText;
+  }
+
+  escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   // 显示搜索提示

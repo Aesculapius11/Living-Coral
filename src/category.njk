@@ -4,7 +4,7 @@ pagination:
   data: collections.categoryList
   size: 1
   alias: cat
-permalink: /categories/{{ cat }}/
+permalink: /categories/{{ cat | url }}/
 eleventyComputed:
   title: "{{ cat }}"
   keywords: "{{ cat }}, 分类, 博客文章, 星辰曦羽"

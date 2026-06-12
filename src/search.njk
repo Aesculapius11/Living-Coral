@@ -50,21 +50,7 @@ keywords: [搜索, 博客搜索, 文章搜索, 技术搜索, 星辰曦羽]
 
 <!-- 搜索索引数据 -->
 <script>
-  window.searchIndex = [
-    {% for item in collections.searchIndex %}
-    {
-      "title": "{{ item.title | replace('"', '\\"') }}",
-      "description": "{{ item.description | replace('"', '\\"') }}",
-      "tags": [{% for tag in item.tags %}"{{ tag }}"{% if not loop.last %},{% endif %}{% endfor %}],
-      "category": "{{ item.category | replace('"', '\\"') }}",
-      "date": "{{ item.date }}",
-                   "url": "{{ item.url }}",
-      "excerpt": "{{ item.excerpt | replace('"', '\\"') }}",
-      "cover": "{{ item.cover | replace('"', '\\"') }}",
-      "content": "{{ item.content | replace('\n', ' ') | replace('\r', ' ') | replace('"', '\\"') }}"
-    }{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ];
+  window.searchIndex = {{ collections.searchIndex | json | safe }};
 </script>
 
 <!-- 搜索脚本 -->
