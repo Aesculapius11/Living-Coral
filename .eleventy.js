@@ -1,4 +1,5 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const markdownIt = require("markdown-it");
 const { DateTime } = require("luxon");
 const fs = require("fs");
 const Image = require("@11ty/eleventy-img");
@@ -45,7 +46,28 @@ function buildPrefixedPath(pathPrefix = "/", pathname = "") {
   return `${prefixPart}/${cleanPath}`;
 }
 
+const markdownLib = markdownIt({
+  html: true,
+  linkify: true,
+  typographer: true,
+});
+
+markdownLib.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+  const token = tokens[idx];
+  const hrefIndex = token.attrIndex("href");
+  if (hrefIndex >= 0) {
+    const href = token.attrs[hrefIndex][1] || "";
+    if (/^https?:\/\//i.test(href)) {
+      token.attrSet("target", "_blank");
+      token.attrSet("rel", "noopener noreferrer");
+    }
+  }
+  return self.renderToken(tokens, idx, options);
+};
+
 module.exports = function (eleventyConfig) {
+  eleventyConfig.setLibrary("md", markdownLib);
+
   // 构建期语法高亮（Prism）；添加语言别名
   eleventyConfig.addPlugin(syntaxHighlight, {
     init: ({ Prism }) => {
