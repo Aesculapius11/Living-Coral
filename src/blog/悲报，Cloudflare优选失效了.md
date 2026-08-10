@@ -1,7 +1,7 @@
 ---
 title: 悲报，Cloudflare优选坠机了
 description: 悲报，Cloudflare优选坠机了，Cloudflare报了一个1034 边缘IP受限，目前只能暂时先开启小黄云切回默认的线路
-date: 2026-8-8
+date: 2026-08-08
 tags: [Cloudflare, CDN, 优选]
 category: 杂项
 keywords: [Cloudflare, 网站, CDN, 优选]
