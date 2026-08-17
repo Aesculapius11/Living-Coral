@@ -2,9 +2,9 @@
 title: 在WPS中开启多线程，解决Excel公式计算卡顿问题
 description: 由于工作的原因，会用到很多数据和公式较多的excel表格，用起来奇卡无比。目前有三个解决方案可以来解决数据和公式导致的卡顿问题。
 date: 2026-08-17
-tags: [Cloudflare, CDN, 优选]
+tags: [WPS, Excel]
 category: 杂项
-keywords: [Cloudflare, 网站, CDN, 优选]
+keywords: [WPS, Excel]
 author: 星辰曦羽
 cover: https://img.antares.xin/assets/wps/3.webp
 layout: layouts/post.njk
