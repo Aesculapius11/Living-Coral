@@ -24,8 +24,8 @@ EVE的官方小说在国内只出版了一本《寰宇时代》，《圣殿骑�
 [燃烧的生命 中英对照](https://img.antares.xin/assets/EVEnovel/Eve：The-Burning-Life-EVE官方小说三部曲.en.zh.epub)
 
 ## 26年11月20日更新
-重新拿AI翻译了一版，这版本的术语更准一点了
-[圣殿骑士一号 中翻](https://img.antares.xin/assets/EVEnovel/v2/译文/Eve：Templar One-EVE官方小说三部曲.epub) 
-[圣殿骑士一号 中英对照](https://img.antares.xin/assets/EVEnovel/v2/双语对照/Eve：Templar One-EVE官方小说三部曲.epub) 
-[燃烧的生命 中翻](https://img.antares.xin/assets/EVEnovel/v2/译文/Eve：The Burning Life-EVE官方小说三部曲.epub)  
+重新拿AI翻译了一版，这版本的术语更准一点了   
+[圣殿骑士一号 中翻](https://img.antares.xin/assets/EVEnovel/v2/译文/Eve：Templar One-EVE官方小说三部曲.epub)    
+[圣殿骑士一号 中英对照](https://img.antares.xin/assets/EVEnovel/v2/双语对照/Eve：Templar One-EVE官方小说三部曲.epub)    
+[燃烧的生命 中翻](https://img.antares.xin/assets/EVEnovel/v2/译文/Eve：The Burning Life-EVE官方小说三部曲.epub)     
 [燃烧的生命 中英对照](https://img.antares.xin/assets/EVEnovel/v2/双语对照/Eve：The Burning Life-EVE官方小说三部曲.epub)
